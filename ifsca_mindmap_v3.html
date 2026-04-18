@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>IFSCA — Regulated Entity Types</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #FBE5D6;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    overflow: hidden;
+  }
+
+  /* ── Header bar ── */
+  #header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 52px;
+    background: #CC0000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  #header-left {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.04em;
+  }
+  #header-right {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    text-align: right;
+  }
+
+  /* ── Controls bar ── */
+  #controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 100;
+  }
+  #controls button {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid #d4b89a;
+    background: #fff;
+    color: #3a1a0a;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    transition: background 0.15s;
+  }
+  #controls button:hover { background: #FBE5D6; }
+
+  /* ── Instructions ── */
+  #hint {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 11px;
+    color: #a07060;
+    z-index: 100;
+    line-height: 1.7;
+  }
+
+  /* ── Canvas ── */
+  #mindmap {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 52px;
+  }
+  #mindmap svg {
+    width: 100%;
+    height: calc(100vh - 52px);
+    margin-top: 52px;
+  }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div id="header-left">IFSCA &nbsp;—&nbsp; Regulated Entity Types</div>
+  <div id="header-right">
+    As at December 31, 2025 &nbsp;·&nbsp; Source: IFSCA Bulletin Q3 FY2025-26, Table 1
+  </div>
+</div>
+
+<div id="mindmap"><svg id="svg"></svg></div>
+
+<div id="controls">
+  <button id="btn-fit" title="Fit to screen">⊙</button>
+  <button id="btn-zoomin" title="Zoom in">+</button>
+  <button id="btn-zoomout" title="Zoom out">−</button>
+</div>
+
+<div id="hint">
+  Scroll to zoom &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Click node to expand/collapse
+</div>
+
+<!-- D3 and Markmap (loaded from CDN — required for rendering) -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18/dist/browser/index.js"></script>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────
+const data = {
+  "content": "IFSCA — Regulated Entity Types",
+  "children": [
+    {
+      "content": "Banking & Payments",
+      "children": [
+        { "content": "IFSC Banking Unit (IBU)", "children": [
+          { "content": "Branch of foreign or domestic bank" },
+          { "content": "Core banking vehicle; wholesale funded" },
+          { "content": "35 operational · USD 106 Bn total assets" }
+        ]},
+        { "content": "IFSC Banking Company (IBC)", "children": [
+          { "content": "Subsidiary incorporated in IFSC" },
+          { "content": "Full banking business; distinct legal entity from IBU" }
+        ]},
+        { "content": "Global Administrative Office (GAO)", "children": [
+          { "content": "Representative and admin office only" },
+          { "content": "No deposit-taking; coordination function" },
+          { "content": "2 registered" }
+        ]},
+        { "content": "Payment Service Provider (PSP)", "children": [
+          { "content": "Cross-border payments, e-money, escrow" },
+          { "content": "Merchant acquisition" },
+          { "content": "3 operational" }
+        ]},
+        { "content": "Payment System Operator", "children": [
+          { "content": "Operates a payment system in IFSC" },
+          { "content": "Must comply with CPMI-IOSCO PFMIs" },
+          { "content": "1 registered: CCIL IFSC Ltd" }
+        ]},
+        { "content": "FCSS Operator", "children": [
+          { "content": "Foreign Currency Settlement System" },
+          { "content": "Settles USD transactions among IBUs" },
+          { "content": "Launched October 2025" }
+        ]}
+      ]
+    },
+    {
+      "content": "Finance Companies",
+      "children": [
+        { "content": "Aircraft Leasing Entity (AOL)", "children": [
+          { "content": "Operating lease of aircraft, engines, helicopters" },
+          { "content": "34 registered; 370 aviation assets leased" }
+        ]},
+        { "content": "Ship Leasing Entity", "children": [
+          { "content": "Operating lease of ships and ocean-going vessels" },
+          { "content": "29 registered; 34 ships leased" }
+        ]},
+        { "content": "FC Core / GRCTC", "children": [
+          { "content": "Lending, trade finance, factoring, securitisation" },
+          { "content": "Global and Regional Corporate Treasury Centres" },
+          { "content": "GRCTCs: USD 4 Bn loans outstanding" }
+        ]},
+        { "content": "ITFS Platform", "children": [
+          { "content": "International Trade Finance Services" },
+          { "content": "Factoring, LC discounting, supply chain finance" },
+          { "content": "4 platforms; 2,106 transactions to Dec 2025" }
+        ]},
+        { "content": "FC Non-Core", "children": [
+          { "content": "Investment advisory" },
+          { "content": "Distribution of financial products" },
+          { "content": "Other operating leases including oilfield equipment" }
+        ]}
+      ]
+    },
+    {
+      "content": "Capital Markets",
+      "children": [
+        { "content": "Market Infrastructure Institution (MII)", "children": [
+          { "content": "Stock exchanges and clearing corporations" },
+          { "content": "5 MIIs: India INX, NSE IX, NICCL, India INX Clearing" }
+        ]},
+        { "content": "Broker Dealer", "children": [
+          { "content": "Executes trades on IFSC exchanges" },
+          { "content": "Client or proprietary basis; 92 registered" }
+        ]},
+        { "content": "Clearing Member", "children": [
+          { "content": "Clears and settles trades via IFSC clearing corporations" },
+          { "content": "24 registered" }
+        ]},
+        { "content": "Depository / Depository Participant", "children": [
+          { "content": "IIDI depository plus 10 DPs for demat accounts" },
+          { "content": "Mandatory for all listed securities" }
+        ]},
+        { "content": "Custodian", "children": [
+          { "content": "Safekeeping of financial assets" },
+          { "content": "Mandatory for Category I and II AIF schemes; 6 registered" }
+        ]},
+        { "content": "Investment Adviser", "children": [
+          { "content": "Investment advisory services to clients in IFSC" },
+          { "content": "5 registered" }
+        ]},
+        { "content": "Registered Distributor", "children": [
+          { "content": "Distributes fund schemes and financial products" },
+          { "content": "19 registered" }
+        ]},
+        { "content": "Investment Banker", "children": [
+          { "content": "Lead manager for public offers, debt issuances, direct listings" },
+          { "content": "6 registered" }
+        ]},
+        { "content": "Debenture Trustee", "children": [
+          { "content": "Trustee for debt security holders on IFSC exchanges" },
+          { "content": "4 registered" }
+        ]},
+        { "content": "Credit Rating Agency", "children": [
+          { "content": "Rates debt securities listed in IFSC" },
+          { "content": "IFSCA-registered CRA rating mandatory from April 2025" },
+          { "content": "2 registered" }
+        ]},
+        { "content": "Global Access Provider (GAP)", "children": [
+          { "content": "Enables IFSC investors to trade on global exchanges" },
+          { "content": "Via India INX Global Access platform; 6 registered" }
+        ]},
+        { "content": "Research Entity", "children": [
+          { "content": "Independent research on financial products and issuers" },
+          { "content": "1 registered" }
+        ]},
+        { "content": "ESG Ratings & Data Products Provider", "children": [
+          { "content": "New category; circular October 2024" },
+          { "content": "Provides ESG ratings and ESG data products" },
+          { "content": "Zero registrants as at December 2025" }
+        ]}
+      ]
+    },
+    {
+      "content": "Fund Management",
+      "children": [
+        { "content": "Registered FME — Retail", "children": [
+          { "content": "Launches mutual funds and ETFs" },
+          { "content": "Highest regulatory requirements" },
+          { "content": "Min net worth USD 750,000; 9 registered" }
+        ]},
+        { "content": "Registered FME — Non-Retail", "children": [
+          { "content": "Launches Category I, II and III AIFs" },
+          { "content": "Provides Portfolio Management Services" },
+          { "content": "Min net worth USD 375,000; 144 registered" }
+        ]},
+        { "content": "Authorised FME", "children": [
+          { "content": "Light-touch registration" },
+          { "content": "VC Schemes for start-ups and Family Investment Funds" },
+          { "content": "Exclusively for accredited investors; 9 registered" }
+        ]},
+        { "content": "Venture Capital / Angel Scheme", "children": [
+          { "content": "Invests in unlisted securities of start-ups" },
+          { "content": "Filed as Category I AIF" },
+          { "content": "17 schemes including 5 Angel Schemes" }
+        ]},
+        { "content": "Restricted Scheme — Category I AIF", "children": [
+          { "content": "Start-ups, social ventures, SMEs, ESG funds" },
+          { "content": "Special Situation funds; close-ended" }
+        ]},
+        { "content": "Restricted Scheme — Category II AIF", "children": [
+          { "content": "PE, debt, real estate, fund of funds" },
+          { "content": "General strategies not under Category I or III; close-ended" }
+        ]},
+        { "content": "Restricted Scheme — Category III AIF", "children": [
+          { "content": "Complex trading strategies, derivatives, hedge funds" },
+          { "content": "Open-ended or close-ended; 189 schemes" }
+        ]},
+        { "content": "Retail Scheme / ETF", "children": [
+          { "content": "Open to retail investors" },
+          { "content": "Tax-neutral treatment per Budget 2024-25; 9 schemes" }
+        ]},
+        { "content": "Portfolio Management Services", "children": [
+          { "content": "Discretionary and non-discretionary" },
+          { "content": "Min investment USD 75,000" },
+          { "content": "23 FMEs providing PMS; AUM USD 1.18 Bn" }
+        ]}
+      ]
+    },
+    {
+      "content": "Insurance, Bullion & Pension",
+      "children": [
+        { "content": "IFSC Insurance Office (IIO)", "children": [
+          { "content": "Life, general, health, reinsurance" },
+          { "content": "Managing General Agent and Lloyds IFSC entity" },
+          { "content": "Min assigned capital USD 1.5 Mn; 24 registered" }
+        ]},
+        { "content": "IFSC Insurance Intermediary (IIIO)", "children": [
+          { "content": "Insurance brokers, surveyors, loss assessors" },
+          { "content": "Third-party administrators, web aggregators; 31 registered" }
+        ]},
+        { "content": "Lloyds IFSC Entity / MGA", "children": [
+          { "content": "Lloyds syndicates underwriting in IFSC" },
+          { "content": "Definition of Service Companies under active consultation" }
+        ]},
+        { "content": "Qualified Supplier — Bullion", "children": [
+          { "content": "Refiners delivering gold and silver on IIBX" },
+          { "content": "Must meet LBMA or UAEGD standards; 33 registered" }
+        ]},
+        { "content": "Qualified Jeweller — Bullion", "children": [
+          { "content": "Direct import of gold and silver via IIBX" },
+          { "content": "At international prices without bank intermediation; 153 registered" }
+        ]},
+        { "content": "Vault Manager", "children": [
+          { "content": "Operates vaults for physical gold and silver on IIBX" },
+          { "content": "Multiple vaults per Vault Manager permitted; 3 registered" }
+        ]},
+        { "content": "Bullion Intermediary", "children": [
+          { "content": "Bullion traders and clearing members of IIBX" },
+          { "content": "Other exchange intermediaries; 23 registered" }
+        ]},
+        { "content": "Pension Fund Manager", "children": [
+          { "content": "Manages pension fund schemes in IFSC" },
+          { "content": "IFSCA Pension Fund Regulations 2026" },
+          { "content": "Operational from April 2026" }
+        ]}
+      ]
+    },
+    {
+      "content": "Financial Support Services",
+      "children": [
+        { "content": "TechFin Entity", "children": [
+          { "content": "AI and ML solutions for financial services" },
+          { "content": "RegTech, SupTech, cybersecurity platforms" },
+          { "content": "Under TAS Regulations 2025" }
+        ]},
+        { "content": "Ancillary Services Provider", "children": [
+          { "content": "Legal, compliance, secretarial services" },
+          { "content": "Auditing, tax advisory, management consulting" },
+          { "content": "116 registered; highest count among support services" }
+        ]},
+        { "content": "BATF Service Provider", "children": [
+          { "content": "Book-keeping, accounting, taxation" },
+          { "content": "Financial Crime Compliance and AML-CFT" },
+          { "content": "Under BATF Regulations 2024; 7 registered" }
+        ]},
+        { "content": "KYC Registration Agency", "children": [
+          { "content": "Centralised KYC record-keeping for IFSC" },
+          { "content": "Under KRA Regulations 2025; first registrant pending" }
+        ]},
+        { "content": "Global In-House Centre (GIC)", "children": [
+          { "content": "Back and middle-office for global financial firms" },
+          { "content": "Two categories: large GIC and mid-size GIC; 3 registered" }
+        ]},
+        { "content": "FinTech Sandbox Entity", "children": [
+          { "content": "Limited Use Authorisation" },
+          { "content": "Innovation Sandbox and Regulatory Sandbox" },
+          { "content": "7 active; 43 cumulative exits" }
+        ]},
+        { "content": "Foreign University IBC", "children": [
+          { "content": "International Branch Campus" },
+          { "content": "Finance, banking, technology degree programmes; 2 operational" }
+        ]}
+      ]
+    }
+  ]
+};
+
+// ── INIT ─────────────────────────────────────────────────────────
+const { Markmap, loadCSS, loadJS } = window.markmap;
+
+const svg = document.getElementById("svg");
+
+// Custom colours matching PFT palette — one per sector branch
+const colors = [
+  "#8B3216",  // Banking — burnt sienna
+  "#2C5830",  // Finance — forest green
+  "#1C3470",  // Capital Markets — navy
+  "#6E1E3C",  // Fund Management — burgundy
+  "#8C4614",  // Insurance/Bullion — amber
+  "#284E5A",  // Support Services — slate teal
+];
+
+const mm = Markmap.create(svg, {
+  autoFit: true,
+  duration: 400,
+  maxWidth: 280,
+  initialExpandLevel: 2,
+  color: (node) => {
+    // Assign colour by top-level branch index
+    const rootChildren = data.children;
+    for (let i = 0; i < rootChildren.length; i++) {
+      if (isDescendant(node, rootChildren[i]) || node === rootChildren[i]) {
+        return colors[i];
+      }
+    }
+    return "#CC0000"; // root node
+  }
+});
+
+function isDescendant(node, ancestor) {
+  if (!ancestor.children) return false;
+  for (const child of ancestor.children) {
+    if (child === node || isDescendant(node, child)) return true;
+  }
+  return false;
+}
+
+mm.setData(data);
+mm.fit();
+
+// ── CONTROLS ─────────────────────────────────────────────────────
+document.getElementById("btn-fit").addEventListener("click", () => mm.fit());
+document.getElementById("btn-zoomin").addEventListener("click", () => {
+  mm.rescale(1.3);
+});
+document.getElementById("btn-zoomout").addEventListener("click", () => {
+  mm.rescale(0.75);
+});
+</script>
+</body>
+</html>
