@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IFSCA Bullion Market Regulations, 2025 — Annotated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400&family=DM+Mono:wght@300;400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1A0505;
+    --paper: #FBE5D6;
+    --parchment: #F5D9C8;
+    --primary: #CC0000;
+    --primary-light: #E05555;
+    --primary-dim: #8B0000;
+    --rust: #8B0000;
+    --teal: #1B5E6A;
+    --annotation-bg: #FFF3ED;
+    --annotation-text: #1A0505;
+    --annotation-border: #CC0000;
+    --highlight: rgba(204,0,0,0.07);
+    --highlight-active: rgba(204,0,0,0.14);
+    --link-color: #CC0000;
+    --pill-bg: rgba(204,0,0,0.10);
+    --sidebar-w: 240px;
+    --annot-w: 320px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr var(--annot-w);
+    grid-template-rows: auto 1fr;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, #8B0000 0%, #CC0000 50%, #D4613A 100%);
+    padding: 48px 48px 40px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 3px solid #991000;
+    border-top: none;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  }
+
+  .header-ornament {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .header-ornament::before,
+  .header-ornament::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+  }
+  .header-ornament::after {
+    background: linear-gradient(90deg, rgba(255,255,255,0.4), transparent);
+  }
+
+  .header-ornament span {
+    color: rgba(255,255,255,0.7);
+    font-size: 18px;
+    letter-spacing: 4px;
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 600;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.5), 0 4px 24px rgba(204,0,0,0.18);
+  }
+
+  .header-sub {
+    text-align: center;
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 12px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+
+  .header-meta {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+
+  .meta-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #ffffff;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    padding: 5px 14px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .pft-byline {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+  }
+
+  .pft-byline span {
+    color: rgba(255,255,255,0.95);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 2px 10px;
+    border-radius: 2px;
+    letter-spacing: 3px;
+  }
+
+  /* ── SIDEBAR NAV ── */
+  .sidebar {
+    background: var(--parchment);
+    border-right: 1px solid rgba(0,0,0,0.12);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #E8B4A0; }
+
+  .nav-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: linear-gradient(135deg, #8B0000 0%, #CC0000 50%, #D4613A 100%);
+    padding: 8px 20px;
+    margin-bottom: 16px;
+  }
+
+  .nav-chapter {
+    padding: 8px 20px 4px;
+  }
+
+  .nav-chapter-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary);
+    font-weight: 400;
+    cursor: pointer;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(204,0,0,0.14);
+    margin-bottom: 4px;
+  }
+
+  .nav-items {
+    list-style: none;
+    padding-left: 10px;
+  }
+
+  .nav-items li a {
+    display: block;
+    font-size: 12.5px;
+    color: #4A1A10;
+    text-decoration: none;
+    padding: 3px 8px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.4;
+    margin: 1px 0;
+    font-family: 'EB Garamond', serif;
+  }
+
+  .nav-items li a:hover,
+  .nav-items li a.active {
+    color: var(--primary);
+    border-left-color: var(--primary);
+    background: rgba(204,0,0,0.06);
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main {
+    padding: 48px 56px;
+    max-width: 820px;
+    min-height: 100vh;
+  }
+
+  /* ── ANNOTATION PANEL ── */
+  .annotation-panel {
+    background: var(--annotation-bg);
+    border-left: 1px solid rgba(204,0,0,0.18);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 32px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary) transparent;
+    transition: background 0.3s;
+  }
+
+  .annotation-panel::-webkit-scrollbar { width: 3px; }
+  .annotation-panel::-webkit-scrollbar-thumb { background: #E8B4A0; }
+
+  .annot-header {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(204,0,0,0.20);
+  }
+
+  .annot-placeholder {
+    color: rgba(139,0,0,0.35);
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+
+  .annot-card {
+    display: none;
+    animation: fadeSlide 0.3s ease;
+  }
+
+  .annot-card.visible { display: block; }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .annot-reg-ref {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #CC0000;
+    letter-spacing: 1.5px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .annot-reg-ref::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(204,0,0,0.20);
+  }
+
+  .annot-section {
+    margin-bottom: 20px;
+  }
+
+  .annot-section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #E8B4A0;
+    margin-bottom: 7px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid rgba(204,0,0,0.10);
+  }
+
+  .annot-section p {
+    font-size: 13px;
+    color: var(--annotation-text);
+    line-height: 1.65;
+    margin-bottom: 8px;
+    font-family: 'EB Garamond', serif;
+  }
+
+  .annot-link {
+    display: inline-block;
+    background: rgba(204,0,0,0.08);
+    border: 1px solid #CC0000;
+    color: #CC0000;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    margin: 3px 3px 3px 0;
+    border-radius: 2px;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .annot-link:hover {
+    background: rgba(204,0,0,0.18);
+    color: #f0d080;
+  }
+
+  .fragile-box {
+    background: #FCE8E8;
+    border-left: 4px solid #8B0000;
+    padding: 10px 12px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 12px;
+  }
+
+  .fragile-box .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #8B0000;
+    margin-bottom: 5px;
+  }
+
+  .fragile-box p {
+    font-size: 12px;
+    color: #3A0808;
+    line-height: 1.6;
+    font-family: 'EB Garamond', serif;
+  }
+
+  /* ── REGULATION CONTENT ── */
+  .chapter-block {
+    margin-bottom: 64px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #E8B4A0;
+  }
+
+  /* Each chapter gets its own accent strip — adjacent palette colours */
+  #ch1 { --ch-accent: #CC0000; --ch-accent-bg: rgba(204,0,0,0.05); }
+  #ch2 { --ch-accent: #B5451B; --ch-accent-bg: rgba(181,69,27,0.05); }
+  #ch3 { --ch-accent: #D4613A; --ch-accent-bg: rgba(212,97,58,0.05); }
+  #ch4 { --ch-accent: #1B5E6A; --ch-accent-bg: rgba(27,94,106,0.05); }
+  #ch5 { --ch-accent: #8B0000; --ch-accent-bg: rgba(139,0,0,0.05); }
+  #ch6 { --ch-accent: #7A3A2A; --ch-accent-bg: rgba(122,58,42,0.05); }
+
+  .chapter-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--ch-accent, #8B0000);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chapter-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--ch-accent, #E8B4A0);
+    opacity: 0.35;
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 32px;
+    padding: 12px 0 16px;
+    border-bottom: 3px solid var(--ch-accent, #CC0000);
+    border-top: 1px solid var(--ch-accent, #CC0000);
+    letter-spacing: 0.02em;
+  }
+
+  /* Provisions within a chapter inherit its accent for left-bar */
+  .chapter-block .provision::before {
+    background: linear-gradient(to bottom, var(--ch-accent, #CC0000), color-mix(in srgb, var(--ch-accent, #CC0000) 60%, #D4613A));
+  }
+
+  .chapter-block .provision:hover,
+  .chapter-block .provision.active {
+    background: var(--ch-accent-bg, rgba(204,0,0,0.05));
+  }
+
+
+  .provision {
+    margin-bottom: 28px;
+    padding: 16px 16px 16px 20px;
+    border-left: 3px solid transparent;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+
+  .provision::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(135deg, #8B0000 0%, #CC0000 50%, #D4613A 100%);
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+    border-radius: 0;
+  }
+
+  .provision:hover {
+    background: var(--highlight);
+  }
+
+  .provision:hover::before {
+    transform: scaleY(1);
+  }
+
+  .provision.active {
+    background: var(--highlight-active);
+  }
+
+  .provision.active::before {
+    transform: scaleY(1);
+  }
+
+  .provision.has-annotation::after {
+    content: '◆';
+    position: absolute;
+    right: 12px;
+    top: 16px;
+    color: #D4613A;
+    font-size: 8px;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .provision:hover.has-annotation::after,
+  .provision.active.has-annotation::after {
+    opacity: 1;
+  }
+
+  .reg-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    color: #D4613A;
+    letter-spacing: 1.5px;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+
+  .reg-heading {
+    font-family: 'EB Garamond', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .reg-text {
+    font-size: 16px;
+    line-height: 1.75;
+    color: #1A0505;
+  }
+
+  .reg-text p { margin-bottom: 10px; }
+
+  .sub-provision {
+    margin: 8px 0 8px 20px;
+    padding: 6px 0 6px 16px;
+    border-left: 2px solid #E8B4A0;
+    font-size: 15.5px;
+    color: #1A0505;
+    line-height: 1.7;
+  }
+
+  .sub-provision + .sub-provision {
+    margin-top: 4px;
+  }
+
+  .sub-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: #E8B4A0;
+    display: inline-block;
+    min-width: 28px;
+  }
+
+  .explanation {
+    background: #EDF6F8;
+    border-left: 4px solid #1B5E6A;
+    padding: 10px 16px;
+    margin: 10px 0;
+    font-size: 15px;
+    color: #0F3A45;
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .explanation .ex-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #1B5E6A;
+    font-style: normal;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── ECOSYSTEM DIAGRAM ── */
+  .ecosystem-block {
+    background: #FBE5D6;
+    border: 1px solid rgba(204,0,0,0.20);
+    border-radius: 4px;
+    padding: 32px;
+    margin: 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ecosystem-block::before {
+    content: 'ECOSYSTEM MAP';
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #E8B4A0;
+  }
+
+  .eco-title {
+    font-family: 'Cinzel', serif;
+    font-size: 13px;
+    color: #CC0000;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .eco-layer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .eco-node {
+    background: rgba(204,0,0,0.07);
+    border: 1px solid rgba(204,0,0,0.30);
+    color: #1A0505;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    padding: 8px 14px;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+
+  .eco-node:hover {
+    background: rgba(204,0,0,0.14);
+    border-color: #CC0000;
+    color: #8B0000;
+  }
+
+  .eco-node.apex {
+    border-color: #CC0000;
+    background: rgba(204,0,0,0.12);
+    color: #CC0000;
+    font-weight: 400;
+  }
+
+  .eco-arrow {
+    text-align: center;
+    color: #E8B4A0;
+    font-size: 14px;
+    margin: 2px 0;
+    letter-spacing: 8px;
+  }
+
+  .eco-connector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin: 6px 0;
+  }
+
+  .eco-line {
+    flex: 1;
+    max-width: 80px;
+    height: 1px;
+    background: rgba(204,0,0,0.20);
+  }
+
+  .eco-dot {
+    width: 5px;
+    height: 5px;
+    background: #E8B4A0;
+    border-radius: 50%;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(204,0,0,0.07);
+    z-index: 999;
+  }
+
+  .reading-progress-bar {
+    height: 100%;
+    background: linear-gradient(135deg, #8B0000 0%, #CC0000 50%, #D4613A 100%);
+    width: 0%;
+    transition: width 0.1s;
+  }
+
+  /* ── INTRO ── */
+  .intro-block {
+    background: #EDE5D8;
+    border: 1px solid rgba(204,0,0,0.12);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .intro-block::before {
+    content: '"';
+    position: absolute;
+    top: -16px;
+    left: 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 60px;
+    color: #CC0000;
+    opacity: 0.25;
+    line-height: 1;
+  }
+
+  .intro-block p {
+    font-size: 16px;
+    color: #1A0505;
+    line-height: 1.8;
+    margin-bottom: 10px;
+  }
+
+  .intro-block p:last-child { margin-bottom: 0; }
+
+  .intro-block strong {
+    color: #E8B4A0;
+    font-weight: 700;
+  }
+
+  /* ── ARTICLE LINK BANNER ── */
+  .article-banner {
+    background: linear-gradient(135deg, var(--ink) 0%, #FBE5D6 100%);
+    border: 1px solid var(--primary);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+
+  .article-banner:hover {
+    border-color: rgba(255,255,255,0.85);
+    transform: translateX(2px);
+  }
+
+  .banner-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .banner-text .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #E8B4A0;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .banner-text .title {
+    font-family: 'EB Garamond', serif;
+    font-size: 17px;
+    color: #1A0505;
+  }
+
+  .banner-arrow {
+    margin-left: auto;
+    color: var(--primary);
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .layout {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto auto 1fr auto;
+    }
+    .sidebar {
+      position: static;
+      height: auto;
+      max-height: 220px;
+      border-right: none;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .main { padding: 32px 24px; }
+    .annotation-panel {
+      position: static;
+      height: auto;
+      min-height: 300px;
+      border-left: none;
+      border-top: 1px solid rgba(204,0,0,0.18);
+    }
+  }
+
+  /* ── TOOLTIP ── */
+  .tooltip-trigger {
+    border-bottom: 1px dotted var(--primary-dim);
+    cursor: help;
+    color: #E8B4A0;
+  }
+</style>
+</head>
+<body>
+
+<div class="reading-progress"><div class="reading-progress-bar" id="progressBar"></div></div>
+
+<div class="layout">
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="header-ornament"><span>⬡</span></div>
+    <h1 class="header-title">IFSCA (Bullion Market) Regulations, 2025</h1>
+    <p class="header-sub">Annotated Edition — Provision by Provision</p>
+    <div class="header-meta">
+      <span class="meta-pill">F. No. IFSCA/GN/2025/001</span>
+      <span class="meta-pill">Notified 4 Feb 2025</span>
+      <span class="meta-pill">In force from gazette date</span>
+      <span class="meta-pill">35 Provisions · 6 Chapters</span>
+    </div>
+    <div class="pft-byline"><span>PFT</span> &nbsp;·&nbsp; Provided Further That</div>
+  </header>
+
+  <!-- ── SIDEBAR ── -->
+  <nav class="sidebar">
+    <div class="nav-label">Navigation</div>
+
+    <div class="nav-chapter">
+      <div class="nav-chapter-title">Chapter I</div>
+      <ul class="nav-items">
+        <li><a href="#reg1">Reg 1 — Short title</a></li>
+        <li><a href="#reg2">Reg 2 — Definitions</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-chapter">
+      <div class="nav-chapter-title">Chapter II · Exchange &amp; BCC</div>
+      <ul class="nav-items">
+        <li><a href="#reg3">Reg 3 — Application</a></li>
+        <li><a href="#reg4">Reg 4 — Recognition conditions</a></li>
+        <li><a href="#reg5">Reg 5 — Grant</a></li>
+        <li><a href="#reg6">Reg 6 — Net worth (Exchange)</a></li>
+        <li><a href="#reg7">Reg 7 — Net worth (BCC)</a></li>
+        <li><a href="#reg8">Reg 8 — Governance</a></li>
+        <li><a href="#reg9">Reg 9 — Public interest directors</a></li>
+        <li><a href="#reg10">Reg 10 — Listing of contracts</a></li>
+        <li><a href="#reg11">Reg 11 — Delisting</a></li>
+        <li><a href="#reg12">Reg 12 — Ownership limits</a></li>
+        <li><a href="#reg13">Reg 13 — Regulatory compliance</a></li>
+        <li><a href="#reg14">Reg 14 — Renewal</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-chapter">
+      <div class="nav-chapter-title">Chapter III · Members</div>
+      <ul class="nav-items">
+        <li><a href="#reg15">Reg 15 — Trading members</a></li>
+        <li><a href="#reg16">Reg 16 — Registration</a></li>
+        <li><a href="#reg17">Reg 17 — Net worth / margins</a></li>
+        <li><a href="#reg18">Reg 18 — Clearing members</a></li>
+        <li><a href="#reg19">Reg 19 — Rights &amp; duties</a></li>
+        <li><a href="#reg20">Reg 20 — Authorised persons</a></li>
+        <li><a href="#reg21">Reg 21 — DMA / Sponsored access</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-chapter">
+      <div class="nav-chapter-title">Chapter IV · Depositories &amp; Vaults</div>
+      <ul class="nav-items">
+        <li><a href="#reg22">Reg 22 — Depository eligibility</a></li>
+        <li><a href="#reg23">Reg 23 — Depository registration</a></li>
+        <li><a href="#reg24">Reg 24 — Vault manager registration</a></li>
+        <li><a href="#reg25">Reg 25 — BDR issuance</a></li>
+        <li><a href="#reg26">Reg 26 — Vault standards</a></li>
+        <li><a href="#reg27">Reg 27 — Good delivery</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-chapter">
+      <div class="nav-chapter-title">Chapter V · QJs &amp; QSs</div>
+      <ul class="nav-items">
+        <li><a href="#reg28">Reg 28 — Qualified jewellers</a></li>
+        <li><a href="#reg29">Reg 29 — Import of gold/silver</a></li>
+        <li><a href="#reg30">Reg 30 — Qualified suppliers</a></li>
+        <li><a href="#reg31">Reg 31 — Obligations</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-chapter">
+      <div class="nav-chapter-title">Chapter VI · Misc</div>
+      <ul class="nav-items">
+        <li><a href="#reg32">Reg 32 — Inspection</a></li>
+        <li><a href="#reg33">Reg 33 — Penalties</a></li>
+        <li><a href="#reg34">Reg 34 — Appeals</a></li>
+        <li><a href="#reg35">Reg 35 — Repeal &amp; saving</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main">
+
+    <!-- INTRO -->
+    <div class="intro-block">
+      <p><strong>What you are reading:</strong> The IFSCA (Bullion Market) Regulations, 2025 are the consolidated regulatory architecture governing every participant in the India International Bullion Exchange (IIBX) ecosystem — from the exchange itself down to the vault storing a 100-gram gold bar in GIFT City.</p>
+      <p>These annotations map the <em>economic logic</em> behind each provision, cross-reference related circulars, and identify structural stress points. Click any provision to open its annotation. This page accompanies the PFT article on the IIBX architecture.</p>
+    </div>
+
+    <!-- ECOSYSTEM MAP -->
+    <div class="ecosystem-block">
+      <div class="eco-title">THE BULLION ECOSYSTEM AT GIFT IFSC</div>
+      <div class="eco-layer">
+        <div class="eco-node apex">IFSCA<br><small style="font-size:9px;opacity:0.7">Apex regulator</small></div>
+      </div>
+      <div class="eco-arrow">↓</div>
+      <div class="eco-layer">
+        <div class="eco-node" onclick="scrollTo('#reg3')">Bullion Exchange<br><small style="font-size:9px;opacity:0.7">IIBX</small></div>
+        <div class="eco-node" onclick="scrollTo('#reg3')">Bullion Clearing Corp<br><small style="font-size:9px;opacity:0.7">India ICC</small></div>
+      </div>
+      <div class="eco-arrow">↓</div>
+      <div class="eco-layer">
+        <div class="eco-node" onclick="scrollTo('#reg15')">Trading Members</div>
+        <div class="eco-node" onclick="scrollTo('#reg18')">Clearing Members</div>
+        <div class="eco-node" onclick="scrollTo('#reg20')">Auth. Persons</div>
+      </div>
+      <div class="eco-arrow">↓</div>
+      <div class="eco-layer">
+        <div class="eco-node" onclick="scrollTo('#reg22')">Bullion Depository<br><small style="font-size:9px;opacity:0.7">CDSL Commodity</small></div>
+        <div class="eco-node" onclick="scrollTo('#reg24')">Vault Managers<br><small style="font-size:9px;opacity:0.7">BRINKS, Sequel, etc.</small></div>
+        <div class="eco-node" onclick="scrollTo('#reg28')">Qualified Jewellers<br><small style="font-size:9px;opacity:0.7">~570+ notified</small></div>
+      </div>
+      <div class="eco-connector"><div class="eco-line"></div><div class="eco-dot"></div><div class="eco-line"></div></div>
+      <div class="eco-layer">
+        <div class="eco-node" onclick="scrollTo('#reg30')">Qualified Suppliers<br><small style="font-size:9px;opacity:0.7">International refiners/banks</small></div>
+        <div class="eco-node" onclick="scrollTo('#reg25')">BDRs<br><small style="font-size:9px;opacity:0.7">Bullion Depository Receipts</small></div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────── -->
+    <!-- CHAPTER I -->
+    <!-- ───────────────────────────────────────── -->
+    <div class="chapter-block" id="ch1">
+      <div class="chapter-label">Chapter I</div>
+      <h2 class="chapter-title">Preliminary</h2>
+
+      <!-- REG 1 -->
+      <div class="provision has-annotation" id="reg1" data-annot="a1" onclick="activateAnnot(this,'a1')">
+        <span class="reg-number">Regulation 1</span>
+        <div class="reg-heading">Short title and commencement</div>
+        <div class="reg-text">
+          <p>(1) These regulations may be called the International Financial Services Centres Authority (Bullion Market) Regulations, 2025.</p>
+          <p>(2) These regulations shall come into force on the date of their notification in the Official Gazette.</p>
+        </div>
+      </div>
+
+      <!-- REG 2 -->
+      <div class="provision has-annotation" id="reg2" data-annot="a2" onclick="activateAnnot(this,'a2')">
+        <span class="reg-number">Regulation 2</span>
+        <div class="reg-heading">Definitions</div>
+        <div class="reg-text">
+          <p>(1) In these regulations, the following terms bear the meanings assigned below:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> <strong>"Act"</strong> — IFSCA Act, 2019 (50 of 2019);</div>
+          <div class="sub-provision"><span class="sub-label">(e)</span> <strong>"bullion"</strong> — precious metals including gold, silver or other precious metals in the form of bars or unallocated gold, silver or other precious metals, as the Authority may consider relevant, relating to good delivery, quality, quantity, and any other aspect in relation to bullion trading;</div>
+          <div class="sub-provision"><span class="sub-label">(f)</span> <strong>"bullion clearing corporation"</strong> — an entity which has been granted recognition under these regulations to undertake the activity of clearing and settlement of trades on a bullion exchange;</div>
+          <div class="sub-provision"><span class="sub-label">(g)</span> <strong>"bullion clearing member"</strong> — an entity having clearing rights in any bullion clearing corporation and as such registered by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(h)</span> <strong>"bullion contract"</strong> — a contract for the purchase and sale of bullion, and includes bullion depository receipts, bullion products similar to BDRs, derivative contracts related to bullion, bullion spot delivery contracts, and any other bullion related contracts, as may be permitted by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(i)</span> <strong>"bullion depository"</strong> — an entity undertaking depository business in relation to securities including bullion depository receipts in an IFSC and regulated by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(j)</span> <strong>"bullion depository receipt (BDR)"</strong> — a receipt created by a bullion depository and listed on a bullion exchange;</div>
+          <div class="sub-provision"><span class="sub-label">(k)</span> <strong>"bullion exchange"</strong> — an entity which has been granted recognition by the Authority for the purpose of assisting, regulating or controlling the business of buying, selling and dealing of BDRs and derivative contracts on bullion in an IFSC;</div>
+          <div class="sub-provision"><span class="sub-label">(l)</span> <strong>"bullion market"</strong> — includes the bullion exchanges, bullion clearing corporations, bullion depositories, vaults, bullion contracts dealt therein, and any other entities connected thereto;</div>
+          <div class="sub-provision"><span class="sub-label">(m)</span> <strong>"bullion trading member"</strong> — an entity having trading rights in a bullion exchange;</div>
+          <div class="sub-provision"><span class="sub-label">(n)</span> <strong>"consumer" or "client"</strong> — a constituent of a bullion trading member and includes special category client or such other persons as may be specified by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(v)</span> <strong>"qualified jeweller"</strong> — a person notified as a Qualified Jeweller by the Ministry of Commerce and Industry, Govt. of India;</div>
+          <div class="sub-provision"><span class="sub-label">(w)</span> <strong>"qualified supplier"</strong> — a person registered as a Qualified Supplier by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(aa)</span> <strong>"vault"</strong> — any approved premises where the vault manager deposits the bullion accepted from depositers and includes other places approved by the Authority for storage of bullion;</div>
+          <div class="sub-provision"><span class="sub-label">(bb)</span> <strong>"vault manager"</strong> — an NCFE registered with the Authority and listed with a bullion depository, having clearing rights to manage the vault business;</div>
+          <div class="explanation">
+            <span class="ex-label">Explanation</span>
+            For the purposes of sub-clause (bb), "NCFE" (Non-Corporate Financial Entity) includes banks, NBFCs and other entities as the Authority may specify.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────── -->
+    <!-- CHAPTER II -->
+    <!-- ───────────────────────────────────────── -->
+    <div class="chapter-block" id="ch2">
+      <div class="chapter-label">Chapter II</div>
+      <h2 class="chapter-title">Recognition of Bullion Exchange and Bullion Clearing Corporation</h2>
+
+      <!-- REG 3 -->
+      <div class="provision has-annotation" id="reg3" data-annot="a3" onclick="activateAnnot(this,'a3')">
+        <span class="reg-number">Regulation 3</span>
+        <div class="reg-heading">Application for Recognition</div>
+        <div class="reg-text">
+          <p>(1) Any applicant desirous of obtaining recognition as a bullion exchange or bullion clearing corporation shall make an application to the Authority in the prescribed form and manner, along with applicable fees.</p>
+          <p>(2) Each application shall include: (a) details of ownership structure; (b) proposed governance framework; (c) details of fit and proper persons; (d) proposed technological infrastructure; (e) financial projections and net worth compliance; (f) any other information the Authority may require.</p>
+          <p>(3) The Authority may call for additional information or clarifications before processing the application.</p>
+        </div>
+      </div>
+
+      <!-- REG 4 -->
+      <div class="provision has-annotation" id="reg4" data-annot="a4" onclick="activateAnnot(this,'a4')">
+        <span class="reg-number">Regulation 4</span>
+        <div class="reg-heading">Conditions for Grant of Recognition</div>
+        <div class="reg-text">
+          <p>(1) An applicant seeking recognition as a bullion exchange or bullion clearing corporation shall comply with the following conditions:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> the applicant is a company limited by shares;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> the applicant is <em>demutualised</em> — i.e., ownership and management of the applicant is segregated from the trading rights or clearing rights, as applicable;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> the applicant, its directors and shareholders who hold or intend to hold shares, are fit and proper persons;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> the applicant satisfies the conditions relating to ownership and governance structure as specified in these regulations;</div>
+          <div class="sub-provision"><span class="sub-label">(e)</span> the applicant satisfies the net worth requirements as specified in these regulations;</div>
+          <div class="sub-provision"><span class="sub-label">(f)</span> the applicant has the requisite capability including financial capacity, functional expertise and infrastructure.</div>
+          <p style="margin-top:12px">(2) An applicant seeking recognition as a <strong>bullion exchange</strong> shall additionally comply with:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> necessary infrastructure for the orderly execution of trades;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> an online screen-based trading system;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> online surveillance capability monitoring positions, prices and volumes in real time to ensure market integrity;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> adequate infrastructure to list BDRs for trading, wherever applicable;</div>
+          <div class="sub-provision"><span class="sub-label">(e)</span> capability to have a comprehensive network of bullion trading members;</div>
+          <div class="sub-provision"><span class="sub-label">(f)</span> arrangements to establish connectivity with trading members and BCC;</div>
+          <div class="sub-provision"><span class="sub-label">(g)</span> adequate consumer grievance redressal mechanism and arbitration mechanism;</div>
+          <div class="sub-provision"><span class="sub-label">(h)</span> facility to disseminate information about trades, quantities and quotes in real time to at least two information vending networks accessible to consumers;</div>
+          <div class="sub-provision"><span class="sub-label">(i)</span> adequate systems' capacity with a business continuity plan including a disaster recovery site.</div>
+          <p style="margin-top:12px">(3) An applicant seeking recognition as a <strong>bullion clearing corporation</strong> shall additionally comply with:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> necessary infrastructure to ensure timely clearing and settlement of trades;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> an adequate risk management mechanism;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> a settlement guarantee fund;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> back-up facilities and systems for settlement.</div>
+        </div>
+      </div>
+
+      <!-- REG 5 -->
+      <div class="provision has-annotation" id="reg5" data-annot="a5" onclick="activateAnnot(this,'a5')">
+        <span class="reg-number">Regulation 5</span>
+        <div class="reg-heading">Grant of Recognition</div>
+        <div class="reg-text">
+          <p>(1) The Authority shall, after considering the application and satisfying itself that the applicant complies with the requirements of these regulations, grant recognition to the applicant as a bullion exchange or bullion clearing corporation.</p>
+          <p>(2) The Authority may impose such conditions while granting recognition as it deems fit, in the interests of the bullion market and investors.</p>
+          <p>(3) The Authority may reject an application where the applicant does not fulfil the requirements, with reasons recorded in writing.</p>
+          <p>(4) Recognition granted under this regulation shall be valid for such period as the Authority may specify and shall be subject to renewal.</p>
+        </div>
+      </div>
+
+      <!-- REG 6 -->
+      <div class="provision has-annotation" id="reg6" data-annot="a6" onclick="activateAnnot(this,'a6')">
+        <span class="reg-number">Regulation 6</span>
+        <div class="reg-heading">Net Worth Requirement — Bullion Exchange</div>
+        <div class="reg-text">
+          <p>(1) A bullion exchange shall at all times maintain a minimum net worth as may be specified by the Authority from time to time.</p>
+          <p>(2) The Authority has, by circular, prescribed the minimum net worth at <strong>USD 5 million</strong> for a bullion exchange.</p>
+          <p>(3) The bullion exchange shall submit audited financial statements and net worth certificates to the Authority at such periodicity as specified.</p>
+        </div>
+      </div>
+
+      <!-- REG 7 -->
+      <div class="provision has-annotation" id="reg7" data-annot="a7" onclick="activateAnnot(this,'a7')">
+        <span class="reg-number">Regulation 7</span>
+        <div class="reg-heading">Net Worth Requirement — Bullion Clearing Corporation</div>
+        <div class="reg-text">
+          <p>(1) A bullion clearing corporation shall at all times maintain a minimum net worth as may be specified by the Authority.</p>
+          <p>(2) The Authority has prescribed the minimum net worth at <strong>USD 10 million</strong> for a bullion clearing corporation.</p>
+          <p>(3) The BCC shall also maintain a Settlement Guarantee Fund at such levels as specified by the Authority from time to time.</p>
+        </div>
+      </div>
+
+      <!-- REG 8 -->
+      <div class="provision has-annotation" id="reg8" data-annot="a8" onclick="activateAnnot(this,'a8')">
+        <span class="reg-number">Regulation 8</span>
+        <div class="reg-heading">Governance Requirements</div>
+        <div class="reg-text">
+          <p>(1) The governing board of a bullion exchange or bullion clearing corporation shall consist of:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> shareholder directors (not exceeding 50% of total directors);</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> trading member / clearing member directors (not exceeding 25%);</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> public interest directors as specified by the Authority.</div>
+          <p style="margin-top:10px">(2) The majority of the governing board shall consist of public interest directors.</p>
+          <p>(3) The Managing Director / CEO and other KMPs shall be appointed in accordance with the fit and proper criteria specified by the Authority.</p>
+        </div>
+      </div>
+
+      <!-- REG 9 -->
+      <div class="provision has-annotation" id="reg9" data-annot="a9" onclick="activateAnnot(this,'a9')">
+        <span class="reg-number">Regulation 9</span>
+        <div class="reg-heading">Public Interest Directors</div>
+        <div class="reg-text">
+          <p>(1) The Authority shall nominate public interest directors on the governing board of every bullion exchange and bullion clearing corporation.</p>
+          <p>(2) Public interest directors shall represent the interests of investors and the securities market generally and shall have no direct or indirect connection with the exchange or clearing corporation that would conflict with their role.</p>
+          <p>(3) A public interest director shall hold office for such period as the Authority may determine and shall be eligible for re-nomination.</p>
+        </div>
+      </div>
+
+      <!-- REG 10 -->
+      <div class="provision has-annotation" id="reg10" data-annot="a10" onclick="activateAnnot(this,'a10')">
+        <span class="reg-number">Regulation 10</span>
+        <div class="reg-heading">Listing of Bullion Contracts</div>
+        <div class="reg-text">
+          <p>(1) A bullion exchange may permit the listing and trading of bullion contracts, including BDRs, bullion spot delivery contracts, derivative contracts related to bullion, and any other contracts as may be permitted by the Authority.</p>
+          <p>(2) The bullion exchange shall frame regulations governing the listing of bullion contracts, subject to the approval of the Authority.</p>
+          <p>(3) The specifications of each bullion contract, including the underlying asset, lot size, delivery mechanism, tick size, margin requirements and settlement procedure, shall be specified in the contract specifications approved by the Authority.</p>
+          <p>(4) Bullion contracts may be cash-settled or physically settled, as specified in the contract specifications.</p>
+        </div>
+      </div>
+
+      <!-- REG 11 -->
+      <div class="provision has-annotation" id="reg11" data-annot="a11" onclick="activateAnnot(this,'a11')">
+        <span class="reg-number">Regulation 11</span>
+        <div class="reg-heading">Suspension and Delisting of Contracts</div>
+        <div class="reg-text">
+          <p>(1) A bullion exchange may, subject to prior approval of the Authority, suspend or delist a bullion contract where continued trading would be detrimental to the interests of market participants or would otherwise be contrary to the interests of the bullion market.</p>
+          <p>(2) Where the Authority is satisfied that continued trading of a bullion contract poses systemic risk, it may direct the exchange to suspend or delist such contract.</p>
+        </div>
+      </div>
+
+      <!-- REG 12 -->
+      <div class="provision has-annotation" id="reg12" data-annot="a12" onclick="activateAnnot(this,'a12')">
+        <span class="reg-number">Regulation 12</span>
+        <div class="reg-heading">Ownership and Shareholding Restrictions</div>
+        <div class="reg-text">
+          <p>(1) No person shall, either individually or together with associates, acquire or hold more than 15% of the paid-up equity share capital of a bullion exchange or bullion clearing corporation without prior approval of the Authority.</p>
+          <p>(2) No trading member or clearing member or associate of such member shall hold more than 5% of the paid-up equity share capital of the bullion exchange or the bullion clearing corporation in which they have trading or clearing rights.</p>
+          <p>(3) Any acquisition of shares beyond the limits specified shall be subject to approval and such conditions as the Authority may impose.</p>
+          <div class="explanation">
+            <span class="ex-label">Explanation — Demutualisation Logic</span>
+            Sub-regulation (2) operationalises the demutualisation requirement in Reg 4(b). It prevents a trading member from simultaneously being a significant owner of the exchange — eliminating the structural conflict between commercial interest and regulatory function.
+          </div>
+        </div>
+      </div>
+
+      <!-- REG 13 -->
+      <div class="provision has-annotation" id="reg13" data-annot="a13" onclick="activateAnnot(this,'a13')">
+        <span class="reg-number">Regulation 13</span>
+        <div class="reg-heading">Regulatory Compliance</div>
+        <div class="reg-text">
+          <p>(1) A bullion exchange and bullion clearing corporation shall, at all times, comply with the provisions of the Act, Securities Contracts (Regulation) Act, 1956, Depositories Act, 1956, these regulations and all circulars, guidelines, directions, and orders issued by the Authority.</p>
+          <p>(2) The bullion exchange shall have in place a comprehensive risk management framework covering market risk, operational risk, credit risk, and systemic risk, as approved by the Authority.</p>
+          <p>(3) The bullion exchange and the BCC shall have a mechanism to detect and prevent manipulative and fraudulent practices, including price manipulation, wash trades, and front-running.</p>
+        </div>
+      </div>
+
+      <!-- REG 14 -->
+      <div class="provision has-annotation" id="reg14" data-annot="a14" onclick="activateAnnot(this,'a14')">
+        <span class="reg-number">Regulation 14</span>
+        <div class="reg-heading">Renewal of Recognition</div>
+        <div class="reg-text">
+          <p>(1) An application for renewal of recognition shall be made in the prescribed form and manner, along with the requisite fees, at least three months before the expiry of the existing recognition.</p>
+          <p>(2) The Authority shall renew the recognition if it is satisfied that the entity continues to comply with the conditions of initial recognition and any additional conditions that may have been imposed.</p>
+          <p>(3) Where an entity fails to apply for renewal within the prescribed period, the recognition shall be deemed to have lapsed and the entity shall not carry on the business of a bullion exchange or BCC.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────── -->
+    <!-- CHAPTER III -->
+    <!-- ───────────────────────────────────────── -->
+    <div class="chapter-block" id="ch3">
+      <div class="chapter-label">Chapter III</div>
+      <h2 class="chapter-title">Bullion Trading Members and Clearing Members</h2>
+
+      <!-- REG 15 -->
+      <div class="provision has-annotation" id="reg15" data-annot="a15" onclick="activateAnnot(this,'a15')">
+        <span class="reg-number">Regulation 15</span>
+        <div class="reg-heading">Eligibility — Bullion Trading Members</div>
+        <div class="reg-text">
+          <p>(1) The following persons are eligible to become bullion trading members of a bullion exchange, subject to compliance with the conditions specified in these regulations:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> an IBU (IFSC Banking Unit) regulated under the IFSCA (Banking) Regulations;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> a Finance Company registered under IFSCA (Finance Company) Regulations;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> a broker-dealer regulated in a foreign jurisdiction;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> a bullion refiner or producer;</div>
+          <div class="sub-provision"><span class="sub-label">(e)</span> any other entity as may be specified by the Authority from time to time.</div>
+          <p style="margin-top:10px">(2) Every bullion trading member shall obtain registration from the Authority before commencing trading on the bullion exchange.</p>
+        </div>
+      </div>
+
+      <!-- REG 16 -->
+      <div class="provision has-annotation" id="reg16" data-annot="a16" onclick="activateAnnot(this,'a16')">
+        <span class="reg-number">Regulation 16</span>
+        <div class="reg-heading">Registration of Bullion Trading Members</div>
+        <div class="reg-text">
+          <p>(1) An applicant seeking registration as a bullion trading member shall make an application to the Authority through the bullion exchange, in such form and manner and along with such fees as may be specified.</p>
+          <p>(2) The applicant shall, inter alia, satisfy the following conditions:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> is a fit and proper person;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> satisfies the net worth requirement as specified;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> has adequate infrastructure and operational capacity;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> has adequate internal systems, controls and risk management processes.</div>
+          <p style="margin-top:10px">(3) The bullion exchange shall make a recommendation to the Authority regarding the suitability of the applicant within 30 days of receipt of the application.</p>
+        </div>
+      </div>
+
+      <!-- REG 17 -->
+      <div class="provision has-annotation" id="reg17" data-annot="a17" onclick="activateAnnot(this,'a17')">
+        <span class="reg-number">Regulation 17</span>
+        <div class="reg-heading">Net Worth and Margins — Trading Members</div>
+        <div class="reg-text">
+          <p>(1) Every bullion trading member shall at all times maintain the minimum net worth as may be specified by the Authority from time to time.</p>
+          <p>(2) The Authority has, by circulars, prescribed the following minimum net worth:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> <strong>Trading-cum-clearing member (TCM):</strong> USD 1.5 million;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> <strong>Professional clearing member (PCM):</strong> USD 3 million;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> <strong>Self-clearing member:</strong> USD 1 million.</div>
+          <p style="margin-top:10px">(3) The bullion exchange shall collect adequate margins from its trading members before commencement of trading, as prescribed by the Authority.</p>
+          <p>(4) A bullion trading member shall not take positions beyond the position limits specified by the bullion exchange, as approved by the Authority.</p>
+        </div>
+      </div>
+
+      <!-- REG 18 -->
+      <div class="provision has-annotation" id="reg18" data-annot="a18" onclick="activateAnnot(this,'a18')">
+        <span class="reg-number">Regulation 18</span>
+        <div class="reg-heading">Bullion Clearing Members</div>
+        <div class="reg-text">
+          <p>(1) The following entities may obtain registration as bullion clearing members:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> a bullion trading member who also wishes to undertake clearing activities (Trading-cum-Clearing Member);</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> an entity that only undertakes clearing activities (Professional Clearing Member) without itself being a trading member;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> a trading member clearing only its own trades (Self-Clearing Member).</div>
+          <p style="margin-top:10px">(2) Every bullion clearing member shall comply with the risk management requirements and margin obligations specified by the BCC, as approved by the Authority.</p>
+          <p>(3) The BCC shall have in place a comprehensive default management procedure for bullion clearing members who fail to meet their obligations.</p>
+        </div>
+      </div>
+
+      <!-- REG 19 -->
+      <div class="provision has-annotation" id="reg19" data-annot="a19" onclick="activateAnnot(this,'a19')">
+        <span class="reg-number">Regulation 19</span>
+        <div class="reg-heading">Rights and Duties of Trading Members</div>
+        <div class="reg-text">
+          <p>(1) A bullion trading member shall comply with all applicable circulars, guidelines and directions issued by the Authority and the bullion exchange.</p>
+          <p>(2) A bullion trading member shall:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> not enter into any bullion contract on behalf of a client unless the client has submitted KYC documentation as required;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> maintain separate client accounts and not use client funds for its own purposes;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> provide contract notes to clients within the specified time;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> report suspicious transactions in accordance with the AML/CFT framework.</div>
+        </div>
+      </div>
+
+      <!-- REG 20 -->
+      <div class="provision has-annotation" id="reg20" data-annot="a20" onclick="activateAnnot(this,'a20')">
+        <span class="reg-number">Regulation 20</span>
+        <div class="reg-heading">Authorised Persons</div>
+        <div class="reg-text">
+          <p>(1) A bullion trading member may appoint authorised persons to assist in carrying out its activities, subject to prior approval of the bullion exchange.</p>
+          <p>(2) An authorised person shall act within the scope authorised by the trading member and shall not independently execute trades.</p>
+          <p>(3) The bullion trading member shall be responsible for all acts and omissions of its authorised persons.</p>
+          <p>(4) An authorised person shall be required to comply with such conditions as may be specified by the Authority, including obtaining prior registration with the bullion exchange.</p>
+        </div>
+      </div>
+
+      <!-- REG 21 -->
+      <div class="provision has-annotation" id="reg21" data-annot="a21" onclick="activateAnnot(this,'a21')">
+        <span class="reg-number">Regulation 21</span>
+        <div class="reg-heading">Direct Market Access (DMA) and Sponsored Access</div>
+        <div class="reg-text">
+          <p>(1) A bullion exchange may, subject to the Authority's approval, provide Direct Market Access (DMA) facilities to eligible clients of trading members, enabling them to place orders directly into the exchange's trading system.</p>
+          <p>(2) A bullion exchange may provide Sponsored Access (SA) to entities that are not registered as trading members but are sponsored by a trading member, enabling direct access to the trading system through the trading member's infrastructure.</p>
+          <p>(3) The bullion exchange shall frame a comprehensive DMA/SA framework specifying eligibility criteria, risk controls, liability, position limits, and oversight mechanisms, subject to approval by the Authority.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────── -->
+    <!-- CHAPTER IV -->
+    <!-- ───────────────────────────────────────── -->
+    <div class="chapter-block" id="ch4">
+      <div class="chapter-label">Chapter IV</div>
+      <h2 class="chapter-title">Bullion Depositories and Vault Managers</h2>
+
+      <!-- REG 22 -->
+      <div class="provision has-annotation" id="reg22" data-annot="a22" onclick="activateAnnot(this,'a22')">
+        <span class="reg-number">Regulation 22</span>
+        <div class="reg-heading">Eligibility for Registration as Bullion Depository</div>
+        <div class="reg-text">
+          <p>(1) An applicant seeking registration as a bullion depository shall:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> be a company incorporated under the Companies Act, 2013;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> have, in its memorandum, the objects relating to carrying on the business of a depository;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> be promoted by a recognised depository in India, or by a depository registered in a foreign jurisdiction with a IOSCO-compliant regulator, or by such other entities as the Authority may specify;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> satisfy the net worth requirements as specified by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(e)</span> have the requisite infrastructure for maintaining accounts of beneficial owners and processing BDRs electronically.</div>
+        </div>
+      </div>
+
+      <!-- REG 23 -->
+      <div class="provision has-annotation" id="reg23" data-annot="a23" onclick="activateAnnot(this,'a23')">
+        <span class="reg-number">Regulation 23</span>
+        <div class="reg-heading">Registration of Bullion Depository</div>
+        <div class="reg-text">
+          <p>(1) An applicant meeting the eligibility criteria shall make an application to the Authority for registration as a bullion depository in the prescribed form.</p>
+          <p>(2) The Authority shall, after examining the application, register the entity as a bullion depository if satisfied that the conditions are met and the registration would be in the interests of the bullion market.</p>
+          <p>(3) The registered bullion depository shall maintain electronic records of BDRs held by beneficial owners and provide a platform for the creation, transfer, and extinguishment of BDRs.</p>
+          <p>(4) The functions of the bullion depository shall include: (a) issuance and maintenance of BDRs; (b) maintaining records of beneficial ownership; (c) interfacing with vault managers; (d) providing settlement infrastructure to the BCC.</p>
+        </div>
+      </div>
+
+      <!-- REG 24 -->
+      <div class="provision has-annotation" id="reg24" data-annot="a24" onclick="activateAnnot(this,'a24')">
+        <span class="reg-number">Regulation 24</span>
+        <div class="reg-heading">Registration of Vault Managers</div>
+        <div class="reg-text">
+          <p>(1) An entity seeking registration as a vault manager shall:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> be a company or an LLP incorporated in the IFSC, or a branch of a foreign company authorised to operate in the IFSC;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> have the vault premises located in the IFSC or in such other location as approved by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> maintain adequate vaulting infrastructure meeting the good delivery standards;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> satisfy the net worth requirements and insurance requirements as specified by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(e)</span> be empanelled with at least one bullion depository.</div>
+          <p style="margin-top:10px">(2) The vault manager shall execute a tripartite agreement among the depositor, the vault manager, and the bullion depository before accepting bullion for storage.</p>
+        </div>
+      </div>
+
+      <!-- REG 25 -->
+      <div class="provision has-annotation" id="reg25" data-annot="a25" onclick="activateAnnot(this,'a25')">
+        <span class="reg-number">Regulation 25</span>
+        <div class="reg-heading">Bullion Depository Receipt (BDR) — Issuance</div>
+        <div class="reg-text">
+          <p>(1) A BDR shall be created upon the deposit of physical bullion by a depositor with an approved vault manager, which shall be recorded by the bullion depository against the depositor's account.</p>
+          <p>(2) Each BDR shall represent a specific quantity of bullion meeting the good delivery standards and shall carry:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> unique identifier issued by the bullion depository;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> details of the vault and the vault manager;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> quantity, fineness and description of the underlying bullion;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> name of the beneficial owner.</div>
+          <p style="margin-top:10px">(3) A BDR shall be listed on the bullion exchange and may be traded thereon in electronic form.</p>
+          <p>(4) The holder of a BDR may surrender the BDR and take delivery of the underlying physical bullion from the vault, subject to the delivery procedures specified by the bullion exchange and the bullion depository.</p>
+          <div class="explanation">
+            <span class="ex-label">Tax Treatment Note</span>
+            BDRs were notified under section 47(viiaab) of the Income Tax Act, 1961 vide IFSCA Circular dated August 3, 2022 — transfers on a recognised bullion exchange attract no capital gains tax if subject to STT. This is the fiscal architecture enabling institutional participation.
+          </div>
+        </div>
+      </div>
+
+      <!-- REG 26 -->
+      <div class="provision has-annotation" id="reg26" data-annot="a26" onclick="activateAnnot(this,'a26')">
+        <span class="reg-number">Regulation 26</span>
+        <div class="reg-heading">Vault Standards and Operations</div>
+        <div class="reg-text">
+          <p>(1) Every vault manager shall maintain the vault premises to the standards specified by the Authority, including:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> robust physical security systems;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> 24x7 CCTV surveillance;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> independent verification and auditing processes;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> adequate insurance covering the full replacement value of bullion stored.</div>
+          <p style="margin-top:10px">(2) The vault manager shall conduct periodic audits and reconcile physical bullion stock against BDR records maintained by the bullion depository.</p>
+          <p>(3) The vault manager shall immediately report any discrepancy between physical stock and electronic records to the bullion depository and the Authority.</p>
+        </div>
+      </div>
+
+      <!-- REG 27 -->
+      <div class="provision has-annotation" id="reg27" data-annot="a27" onclick="activateAnnot(this,'a27')">
+        <span class="reg-number">Regulation 27</span>
+        <div class="reg-heading">Good Delivery Standards</div>
+        <div class="reg-text">
+          <p>(1) Only bullion that meets the good delivery standards specified by the Authority shall be accepted for deposit by a vault manager and represented in a BDR.</p>
+          <p>(2) The Authority has adopted, with modifications, the LBMA Good Delivery Standards for gold and silver, as the benchmark for bullion accepted on IIBX.</p>
+          <p>(3) Bullion from Qualified Suppliers (international refiners accredited on IIBX's qualified supplier list) meeting the standards shall be accepted without further assay. Bullion from other sources shall be subject to assay and re-branding at the depositor's cost.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────── -->
+    <!-- CHAPTER V -->
+    <!-- ───────────────────────────────────────── -->
+    <div class="chapter-block" id="ch5">
+      <div class="chapter-label">Chapter V</div>
+      <h2 class="chapter-title">Qualified Jewellers and Qualified Suppliers</h2>
+
+      <!-- REG 28 -->
+      <div class="provision has-annotation" id="reg28" data-annot="a28" onclick="activateAnnot(this,'a28')">
+        <span class="reg-number">Regulation 28</span>
+        <div class="reg-heading">Qualified Jewellers — Access to IIBX</div>
+        <div class="reg-text">
+          <p>(1) A "Qualified Jeweller" means a person notified as such by the Ministry of Commerce and Industry, Government of India, or such other Ministry as designated by the Central Government.</p>
+          <p>(2) Qualified Jewellers may access the bullion exchange for the purpose of importing gold and silver through IIBX, subject to compliance with the conditions specified herein and in the applicable DGFT notifications, RBI regulations, and IFSCA circulars.</p>
+          <p>(3) The IFSCA shall specify, from time to time, the mechanism and conditions under which Qualified Jewellers may participate in the bullion exchange, including the size of lots for import, the payment mechanism, and the delivery process.</p>
+          <p>(4) The cumulative import limits for Qualified Jewellers through IIBX shall be as specified by the Ministry of Commerce and IFSCA jointly.</p>
+        </div>
+      </div>
+
+      <!-- REG 29 -->
+      <div class="provision has-annotation" id="reg29" data-annot="a29" onclick="activateAnnot(this,'a29')">
+        <span class="reg-number">Regulation 29</span>
+        <div class="reg-heading">Import of Gold and Silver by Qualified Jewellers</div>
+        <div class="reg-text">
+          <p>(1) A Qualified Jeweller desiring to import gold or silver through IIBX shall onboard itself with the bullion exchange as a client of a registered bullion trading member.</p>
+          <p>(2) The bullion exchange shall specify the eligible products, delivery schedules, lot sizes, and other terms for import by Qualified Jewellers.</p>
+          <p>(3) The proceeds of any transaction by a Qualified Jeweller through IIBX shall be routed through the banking channel and in compliance with the Foreign Exchange Management Act, 1999 and RBI directions.</p>
+          <p>(4) Upon delivery of bullion to the Qualified Jeweller, the vault manager shall arrange for clearance through the designated customs authorities and delivery to the Qualified Jeweller's designated premises in India.</p>
+        </div>
+      </div>
+
+      <!-- REG 30 -->
+      <div class="provision has-annotation" id="reg30" data-annot="a30" onclick="activateAnnot(this,'a30')">
+        <span class="reg-number">Regulation 30</span>
+        <div class="reg-heading">Qualified Suppliers</div>
+        <div class="reg-text">
+          <p>(1) A "Qualified Supplier" means a person registered as a Qualified Supplier by the Authority and empanelled to supply bullion on IIBX.</p>
+          <p>(2) Any of the following entities may apply for registration as a Qualified Supplier:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> LBMA Good Delivery refiners;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> other internationally recognised refiners as may be specified by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> bullion banks and bullion dealers in foreign jurisdictions regulated by an IOSCO-compliant regulator.</div>
+          <p style="margin-top:10px">(3) A Qualified Supplier shall supply bullion meeting the good delivery standards and shall comply with the conditions specified by the Authority from time to time.</p>
+          <p>(4) Qualified Suppliers shall be permitted to hold unallocated bullion positions and to conduct transactions on IIBX as specified by the Authority.</p>
+        </div>
+      </div>
+
+      <!-- REG 31 -->
+      <div class="provision has-annotation" id="reg31" data-annot="a31" onclick="activateAnnot(this,'a31')">
+        <span class="reg-number">Regulation 31</span>
+        <div class="reg-heading">Obligations of Qualified Jewellers and Qualified Suppliers</div>
+        <div class="reg-text">
+          <p>(1) Every Qualified Jeweller and Qualified Supplier shall:</p>
+          <div class="sub-provision"><span class="sub-label">(a)</span> comply with all applicable provisions of these regulations and directives issued by the Authority;</div>
+          <div class="sub-provision"><span class="sub-label">(b)</span> maintain proper books of accounts in relation to their activities on IIBX;</div>
+          <div class="sub-provision"><span class="sub-label">(c)</span> report such information to the Authority as may be specified from time to time;</div>
+          <div class="sub-provision"><span class="sub-label">(d)</span> not engage in any market manipulation or fraudulent practices.</div>
+          <p style="margin-top:10px">(2) The Authority may, by circular, specify additional obligations including AML/CFT compliance requirements applicable to Qualified Jewellers and Qualified Suppliers.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ───────────────────────────────────────── -->
+    <!-- CHAPTER VI -->
+    <!-- ───────────────────────────────────────── -->
+    <div class="chapter-block" id="ch6">
+      <div class="chapter-label">Chapter VI</div>
+      <h2 class="chapter-title">Miscellaneous</h2>
+
+      <!-- REG 32 -->
+      <div class="provision has-annotation" id="reg32" data-annot="a32" onclick="activateAnnot(this,'a32')">
+        <span class="reg-number">Regulation 32</span>
+        <div class="reg-heading">Inspection</div>
+        <div class="reg-text">
+          <p>(1) The Authority may appoint an inspecting authority to undertake inspection of the books of account, records and documents of any person regulated under these regulations.</p>
+          <p>(2) Such inspecting authority shall have access to all books of account, registers, documents, data and systems maintained by the regulated entity.</p>
+          <p>(3) The regulated entity shall extend full cooperation and provide all documents requested by the inspecting authority within the time specified.</p>
+        </div>
+      </div>
+
+      <!-- REG 33 -->
+      <div class="provision has-annotation" id="reg33" data-annot="a33" onclick="activateAnnot(this,'a33')">
+        <span class="reg-number">Regulation 33</span>
+        <div class="reg-heading">Penalties</div>
+        <div class="reg-text">
+          <p>(1) Without prejudice to the other provisions of these regulations and the Act, if any entity fails to comply with the provisions of these regulations or the directions of the Authority, the Authority may take such action or impose such penalty as may be prescribed under the Act.</p>
+          <p>(2) Penalties may include: (a) monetary penalty; (b) suspension or cancellation of recognition or registration; (c) prohibition from participating in the bullion market; (d) any other action as the Authority deems appropriate.</p>
+        </div>
+      </div>
+
+      <!-- REG 34 -->
+      <div class="provision has-annotation" id="reg34" data-annot="a34" onclick="activateAnnot(this,'a34')">
+        <span class="reg-number">Regulation 34</span>
+        <div class="reg-heading">Appeals</div>
+        <div class="reg-text">
+          <p>(1) Any person aggrieved by an order or decision of the Authority under these regulations may prefer an appeal to the Securities Appellate Tribunal (SAT) under section 21 of the IFSCA Act, 2019.</p>
+          <p>(2) The appeal shall be filed within 45 days of the date of receipt of the order, along with the prescribed fee.</p>
+        </div>
+      </div>
+
+      <!-- REG 35 -->
+      <div class="provision has-annotation" id="reg35" data-annot="a35" onclick="activateAnnot(this,'a35')">
+        <span class="reg-number">Regulation 35</span>
+        <div class="reg-heading">Repeal and Saving</div>
+        <div class="reg-text">
+          <p>(1) The IFSCA (Bullion Exchange) Regulations, 2020 and the IFSCA (Bullion Exchange) (Amendment) Regulations, 2021 are hereby repealed.</p>
+          <p>(2) Notwithstanding such repeal: (a) anything done or any action taken under the repealed regulations shall, to the extent consistent with these regulations, be deemed to have been done or taken under these regulations; (b) any application pending under the repealed regulations shall be treated as an application under these regulations; (c) any recognition or registration granted under the repealed regulations shall continue to be valid until it expires or is cancelled.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARTICLE BANNER -->
+    <a class="article-banner" href="#" id="articleBanner">
+      <div class="banner-icon">✦</div>
+      <div class="banner-text">
+        <span class="label">PFT — Provided Further That</span>
+        <span class="title">Read the full analysis: Architecture of India's Bullion Market at GIFT IFSC</span>
+      </div>
+      <div class="banner-arrow">→</div>
+    </a>
+
+  </main>
+
+  <!-- ── ANNOTATION PANEL ── -->
+  <aside class="annotation-panel">
+    <div class="annot-header">Annotations &amp; Commentary</div>
+    <p class="annot-placeholder" id="annotPlaceholder">← Select any highlighted provision to read its annotation — economic logic, structural drivers, cross-references, and the most fragile assumption in each provision.</p>
+
+    <!-- ANNOT 1 -->
+    <div class="annot-card" id="a1">
+      <div class="annot-reg-ref">REG 1 · Short Title</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Significance</div>
+        <p>BMR 2025 is a consolidation and expansion of the 2020 framework. The name change from "Bullion Exchange" Regulations to "Bullion Market" Regulations signals regulatory intent to govern the entire ecosystem — exchange, clearing, depository, vault, and access — under a single instrument.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">What Changed from 2020</div>
+        <p>The 2020 regulations focused primarily on the exchange and clearing layer. BMR 2025 adds comprehensive coverage of vault managers, bullion depositories, qualified suppliers, and the DMA/sponsored access framework — reflecting IIBX's operational maturity since August 2022.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 2 -->
+    <div class="annot-card" id="a2">
+      <div class="annot-reg-ref">REG 2 · Definitions</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Structural Weight of "Bullion Contract"</div>
+        <p>The definition of "bullion contract" (h) is deliberately broad — it encompasses BDRs, spot delivery contracts, derivatives, <em>and</em> products similar to BDRs. This gives IFSCA the flexibility to permit new instruments (e.g., unallocated gold accounts, lease products, forwards) without amending the principal regulation.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">BDR as a Security</div>
+        <p>The BDR definition (j) is architecturally critical. By defining BDRs as a receipt created by a depository and listed on an exchange, IFSCA brings them within the SCRA 1956 framework — making them "securities" subject to securities law, not commodity law. This enables IBUs and regulated entities that cannot trade commodities to participate.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">BMR 2020 (repealed)</span>
+        <span class="annot-link">SCRA 1956 — s.2(h)</span>
+        <span class="annot-link">Depositories Act 1956</span>
+        <span class="annot-link">IFSCA Act 2019 — s.12-13, 28</span>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>The BDR-as-security classification depends on the SCRA 1956 reading of "security" as including receipts of depository instruments. If this is challenged — particularly for unallocated positions — the regulatory fabric unravels. The ITI notification under s.47(viiaab) has partially addressed the tax leg, but the securities law position has not been judicially tested.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 3 -->
+    <div class="annot-card" id="a3">
+      <div class="annot-reg-ref">REG 3 · Application</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Gate Function</div>
+        <p>This provision functions as a quality gate — the information requirements in sub-regulation (2) signal the Authority's due diligence framework. The governance and infrastructure disclosures are not merely procedural; they form the factual basis on which Reg 4 conditions are assessed.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Current Position</div>
+        <p>As of 2025, IIBX is the only recognised bullion exchange and India ICC is the only recognised BCC. The application process is, in practice, a feature that could be triggered by a new entrant — but the capital and infrastructure barriers make this unlikely in the near term.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 4 -->
+    <div class="annot-card" id="a4">
+      <div class="annot-reg-ref">REG 4 · Recognition Conditions</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Demutualisation Architecture</div>
+        <p>Sub-regulation (1)(b) mandates demutualisation — the structural separation of ownership from trading/clearing rights. This is modelled on the global post-2000 exchange reform wave (NYSE, LSE, BSE). In the bullion context, the risk being addressed is that a large bullion bank with a trading membership could, if also a significant shareholder, influence exchange policies in its own commercial interest.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Exchange vs. BCC Conditions</div>
+        <p>Sub-regulations (2) and (3) differentiate the infrastructure requirements for the exchange layer (execution, surveillance, market access) vs. the clearing layer (risk management, SGF, settlement). The bifurcation is not merely operational — it reflects a deliberate choice to keep CCP risk ring-fenced from exchange operational risk.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular 2021 — Trading Members</span>
+        <span class="annot-link">Circular 2023 — Net worth</span>
+        <span class="annot-link">Circular 2024 — TCM/PCM</span>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>The CCP model assumes the SGF will be sufficient to absorb a member default. In a commodity with the price volatility of gold (historically ±3% intraday), a simultaneous default by two large clearing members could breach the SGF. There is no explicit mention of a "resolution" regime for the BCC under BMR 2025.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 5 -->
+    <div class="annot-card" id="a5">
+      <div class="annot-reg-ref">REG 5 · Grant of Recognition</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Discretionary Conditions</div>
+        <p>Sub-regulation (2) gives IFSCA broad discretion to impose conditions at the grant stage. In practice, this is the mechanism through which many operating parameters (fee schedules, governance requirements, product approvals) are imposed via the recognition letter rather than through formal regulation. This creates a hybrid public-private regulatory instrument that is difficult to challenge.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Validity Period</div>
+        <p>The initial recognition granted to IIBX was for three years. Renewal was granted in December 2022. BMR 2025 does not specify the validity period — leaving it to IFSCA's discretion. This creates a contingent compliance obligation: all of IIBX's commercial commitments to members and clients are ultimately underwritten by a renewable regulatory licence.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 6 -->
+    <div class="annot-card" id="a6">
+      <div class="annot-reg-ref">REG 6 · Net Worth — Exchange</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Economic Logic</div>
+        <p>The USD 5 million floor for the exchange is a skin-in-the-game requirement. It is not designed to absorb trading losses (the SGF does that) but to ensure the exchange has sufficient capital to fund technology, surveillance, governance, and business continuity. USD 5 million is modest by global exchange standards (SGX's minimum is ~USD 250 million in capital), reflecting GIFT IFSC's status as an early-stage market.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular 23 Mar 2023 — Net Worth</span>
+        <span class="annot-link">Circular Feb 2024 — Updated</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 7 -->
+    <div class="annot-card" id="a7">
+      <div class="annot-reg-ref">REG 7 · Net Worth — BCC</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Higher Floor for BCC</div>
+        <p>The USD 10 million floor for the BCC (vs. USD 5 million for the exchange) reflects the systemic importance of the clearing function. The BCC as central counterparty novates every trade — it becomes the buyer to every seller and the seller to every buyer. A BCC failure is a market failure. The capital buffer here functions as a credibility signal, not as a true loss-absorption mechanism (that role belongs to the SGF and the default waterfall).</p>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>The SGF design is not prescribed in BMR 2025 — it is left to circulars. This means the most critical risk parameter in the bullion ecosystem is sub-delegated below the principal regulation and can be changed without formal amendment.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 8 -->
+    <div class="annot-card" id="a8">
+      <div class="annot-reg-ref">REG 8 · Governance</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Board Composition as Risk Mitigation</div>
+        <p>The governance architecture (majority PIDs + cap on shareholder and trading member directors) is designed to manage three distinct conflicts: (i) shareholder commercial interest vs. market integrity; (ii) trading member interest in lower margins vs. CCP risk management; (iii) operational management vs. regulatory accountability. The PID mechanism is the primary tool, but PIDs in IFSC entities have rarely served an adversarial compliance function — the culture is still developmental.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular 2021 — IIBX governance</span>
+        <span class="annot-link">SEBI analogues — SCRA s.4</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 9 -->
+    <div class="annot-card" id="a9">
+      <div class="annot-reg-ref">REG 9 · Public Interest Directors</div>
+      <div class="annot-section">
+        <div class="annot-section-title">IFSCA's Structural Leverage</div>
+        <p>The PID nomination power gives IFSCA a permanent presence on every exchange and BCC board. Unlike the SEBI model where PIDs are often industry nominees, IFSCA's PIDs at GIFT IFSC tend to be ex-regulators or independent technicians. In a market with 3-4 regulated entities, this creates high regulatory density — every material decision at board level is, effectively, co-made with the regulator.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 10 -->
+    <div class="annot-card" id="a10">
+      <div class="annot-reg-ref">REG 10 · Listing of Contracts</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Product Gatekeeping</div>
+        <p>This is the most commercially consequential provision in Chapter II. The product approval mechanism (contract specifications must be approved by IFSCA) means that every new instrument — options, forwards, mini-contracts, unallocated gold accounts, silver coins — requires regulatory sign-off. This creates product development lag but also regulatory accountability for any instrument that causes losses.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Current Product Suite (as of 2025)</div>
+        <p>IIBX trades: (i) BDR-based spot contracts (Gold 1 kg, Gold 100g, Silver 30 kg); (ii) BDR mini-contracts; (iii) pilot of derivative contracts is under exploration. The DMA/sponsored access circular (July 2024) enables more sophisticated participants without product expansion.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular Jul 2024 — DMA/SA</span>
+        <span class="annot-link">Circular Apr 2025 — Vibrance circular</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 12 -->
+    <div class="annot-card" id="a12">
+      <div class="annot-reg-ref">REG 12 · Ownership Limits</div>
+      <div class="annot-section">
+        <div class="annot-section-title">15% Concentration Cap</div>
+        <p>The 15% single-entity cap mirrors global exchange governance norms (NYSE, HKEX). The deeper logic: a 15%+ holder can exercise disproportionate influence on board composition, thereby undermining demutualisation. The 5% cap on trading members is the tighter constraint — it prevents a dominant liquidity provider from having a structural information advantage via board access.</p>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>In IIBX's current shareholding structure, BSE holds a significant stake. If BSE's stake approaches or exceeds the 15% threshold — or if IFSCA decides to widen the ownership regime to attract strategic investors — the cap would need to be revisited.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 14 -->
+    <div class="annot-card" id="a14">
+      <div class="annot-reg-ref">REG 14 · Renewal</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Regulatory Leverage via Renewal</div>
+        <p>The renewal mechanism gives IFSCA substantial ongoing leverage. An exchange cannot plan multi-year capital expenditures without reasonable assurance of renewal. The three-month advance application window is short relative to infrastructure investment cycles. In practice, renewal is expected to be routine — but the theoretical possibility of non-renewal is a powerful disciplining mechanism.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 15 -->
+    <div class="annot-card" id="a15">
+      <div class="annot-reg-ref">REG 15 · Trading Member Eligibility</div>
+      <div class="annot-section">
+        <div class="annot-section-title">IBUs at the Centre</div>
+        <p>The inclusion of IBUs as eligible trading members is the architectural hinge of IIBX. IBUs are IFSC Banking Units — effectively foreign bank branches regulated by IFSCA/RBI operating in USD. Their participation as trading members means global bullion banks (HSBC, Standard Chartered, JP Morgan) can transact on IIBX directly, eliminating the need for domestic intermediaries.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Global Banks Circular</div>
+        <p>The August 2025 circular on "Revenue Drivers of Global Banks in Bullion Business" explicitly maps how IBUs can monetise IIBX membership through market-making, lending gold on unallocated basis, and acting as clearing members.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular Aug 2025 — Global Banks</span>
+        <span class="annot-link">Circular Aug 2024 — TCM/PCM updated</span>
+        <span class="annot-link">IFSCA Banking Regulations 2020</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 16 -->
+    <div class="annot-card" id="a16">
+      <div class="annot-reg-ref">REG 16 · Registration</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Exchange-Mediated Registration</div>
+        <p>Applications are routed through the exchange (not directly to IFSCA). This creates a two-stage filtration: exchange commercial judgment → IFSCA regulatory approval. The exchange has an incentive to recommend memberships (fee income) but also a reputational interest in maintaining member quality. IFSCA reserves final approval, preserving regulatory primacy.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 17 -->
+    <div class="annot-card" id="a17">
+      <div class="annot-reg-ref">REG 17 · Net Worth &amp; Margins</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Three-Tier Member Architecture</div>
+        <p>The TCM/PCM/SCM distinction creates a layered risk architecture. TCMs are the most common — they both trade and clear. PCMs provide clearing services to trading-only members, concentrating clearing risk in fewer, better-capitalised entities. The USD differential (SCM 1M → TCM 1.5M → PCM 3M) reflects the escalating systemic importance of each role.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular Jan 2023 — Net worth</span>
+        <span class="annot-link">Circular Feb 2024 — Updated thresholds</span>
+        <span class="annot-link">Circular Aug 2024 — TCM/PCM revised</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 18 -->
+    <div class="annot-card" id="a18">
+      <div class="annot-reg-ref">REG 18 · Clearing Members</div>
+      <div class="annot-section">
+        <div class="annot-section-title">CCP Default Waterfall</div>
+        <p>The default management procedure mentioned in sub-regulation (3) is where the real systemic risk engineering happens. The standard CPMI-IOSCO framework for CCPs prescribes: initial margin → variation margin → defaulting member's default fund contribution → surviving members' default fund contributions → CCP's own capital → assessment powers. BMR 2025 delegates the design of this waterfall to circulars and BCC regulations.</p>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>The default waterfall at IIBX/India ICC has not been publicly stress-tested. Given gold's status as a flight-to-quality asset, a clearing member default is most likely to occur during a period of extreme gold price volatility — precisely when the SGF itself is under stress.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 19 -->
+    <div class="annot-card" id="a19">
+      <div class="annot-reg-ref">REG 19 · Rights &amp; Duties</div>
+      <div class="annot-section">
+        <div class="annot-section-title">AML/CFT in Bullion Context</div>
+        <p>The AML/CFT obligation for trading members (d) is particularly important for gold given its historical use in trade mis-invoicing, hawala transactions, and sanctions evasion. The FATF grey-listed India for gold-related AML deficiencies. IIBX's formal AML framework — KYC of Qualified Jewellers, transaction reporting — is part of India's response architecture.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 20 -->
+    <div class="annot-card" id="a20">
+      <div class="annot-reg-ref">REG 20 · Authorised Persons</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Extended Access Model</div>
+        <p>The Authorised Person framework (formalised in the Sep 2025 circular) allows smaller entities — regional jewellers, smaller banks — to access IIBX through a trading member without the capital commitment of full membership. This is the IFSCA's answer to the access problem: how do you get 570+ qualified jewellers onto an exchange designed for institutional participants?</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular Sep 2025 — Auth. Persons</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 21 -->
+    <div class="annot-card" id="a21">
+      <div class="annot-reg-ref">REG 21 · DMA / Sponsored Access</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Algorithmic Trading Gateway</div>
+        <p>DMA/SA (covered by the Jul 2024 circular) is the mechanism for institutional algorithmic participation. DMA allows a client to route orders directly to the exchange's matching engine without human intermediation by the broker. SA goes further — the client uses the broker's network ID. The key risk control question (who bears the risk of a rogue algorithm?) is addressed by requiring the trading member to retain full liability.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular Jul 2024 — DMA/SA framework</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 22 -->
+    <div class="annot-card" id="a22">
+      <div class="annot-reg-ref">REG 22 · Depository Eligibility</div>
+      <div class="annot-section">
+        <div class="annot-section-title">CDSL as Bullion Depository</div>
+        <p>CDSL Commodity Repository Ltd (CCRL) is the only registered bullion depository. It is a subsidiary of CDSL, which satisfies the "promoted by a recognised depository in India" criterion. The depository function here is analogous to demat accounts in equities — except the underlying asset is physical gold in a vault rather than equity shares.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Structural Insight</div>
+        <p>The BDR as a depository receipt is the key instrument that converts physical gold into a tradeable, electronically-transferable, securities-law-governed instrument. Without the depository layer, IIBX would be a commodity exchange. With it, IIBX is a hybrid securities/commodity market with access to the full SEBI/IFSCA regulatory toolkit.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 23 -->
+    <div class="annot-card" id="a23">
+      <div class="annot-reg-ref">REG 23 · Depository Registration</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Interface Function</div>
+        <p>The depository's four functions (BDR issuance, beneficial ownership records, vault manager interface, settlement infrastructure) make it the operational fulcrum of the IIBX ecosystem. Every physical-to-electronic conversion and every settlement in BDRs flows through the depository. Its failure would be a market-wide operational event.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 24 -->
+    <div class="annot-card" id="a24">
+      <div class="annot-reg-ref">REG 24 · Vault Manager Registration</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Where the Metal Actually Lives</div>
+        <p>Vault managers are the physical layer of the IIBX architecture. Currently approved vault managers include BRINKS India and Sequel Logistics. The vault is located in GIFT City (Gujarat), meaning bullion imported through IIBX stays in a customs-bonded facility until taken delivery by a Qualified Jeweller — enabling it to be traded multiple times before physical delivery.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Tripartite Agreement Risk</div>
+        <p>The tripartite agreement (depositor-vault manager-depository) is the legal instrument linking physical custody to electronic records. Its enforceability in an insolvency scenario (particularly the vault manager's insolvency) is the key risk: does the depositor's claim on physical gold in a bankrupt vault survive? This is a live question in Indian insolvency law.</p>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>The entire BDR architecture assumes that BDR-holder claims on physical gold are bankruptcy-remote from the vault manager's general creditors. This is not explicitly confirmed in Indian law and would need to be tested under the IBC 2016.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 25 -->
+    <div class="annot-card" id="a25">
+      <div class="annot-reg-ref">REG 25 · BDR Issuance</div>
+      <div class="annot-section">
+        <div class="annot-section-title">The Instrument Architecture</div>
+        <p>BDR creation is a three-step process: physical deposit → vault manager acknowledgement → depository electronic record. Each BDR is uniquely identified and represents a specific bar. This granularity (vs. fungible unallocated accounts) has an operational cost — it requires assay, bar-level tracking, and vault reconciliation — but it provides beneficial owner certainty that allocated accounts guarantee.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Physical Delivery Mechanism</div>
+        <p>Sub-regulation (4) — BDR surrender for physical delivery — is how Qualified Jewellers import gold. They buy BDRs on IIBX, surrender them, and take physical delivery from the vault. The DGFT/Customs mechanics of this process (duty payment, customs clearance, transport to the jeweller's premises) are prescribed in DGFT notifications and IFSCA circulars, not in BMR 2025 itself.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular Aug 2022 — BDR IT Act notification</span>
+        <span class="annot-link">Circular Dec 2023 — QJ import process</span>
+        <span class="annot-link">DGFT Notification 2022 — QJ scheme</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 26 -->
+    <div class="annot-card" id="a26">
+      <div class="annot-reg-ref">REG 26 · Vault Standards</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Physical Risk Layer</div>
+        <p>The vault is where systemic risk becomes physical risk. Audit reconciliation (sub-reg 2) is designed to catch discrepancies between physical stock and electronic BDR records — the classic risk in commodity warehousing (the Qingdao port aluminium fraud of 2014 is the cautionary case). The insurance requirement is the financial backstop if physical gold is lost, stolen, or destroyed.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 27 -->
+    <div class="annot-card" id="a27">
+      <div class="annot-reg-ref">REG 27 · Good Delivery Standards</div>
+      <div class="annot-section">
+        <div class="annot-section-title">LBMA as Global Benchmark</div>
+        <p>Adopting LBMA Good Delivery standards is the key quality-assurance mechanism. LBMA-accredited bars are accepted in all major global bullion markets — this means IIBX's BDRs represent internationally tradeable quality metal, not domestically-standard metal. This is prerequisite for attracting international market makers and Qualified Suppliers.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Qualified Supplier Privilege</div>
+        <p>LBMA-accredited suppliers (e.g., Valcambi, Heraeus, PAMP, MKS Pamp, MMTC-PAMP) deposit gold without further assay — a material operational advantage. Non-LBMA gold requires local assay and potentially re-melting/re-branding, adding cost and time.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 28 -->
+    <div class="annot-card" id="a28">
+      <div class="annot-reg-ref">REG 28 · Qualified Jewellers</div>
+      <div class="annot-section">
+        <div class="annot-section-title">The Political Economy of QJ Access</div>
+        <p>The "Qualified Jeweller" category is not created by BMR 2025 — it is created by the Ministry of Commerce under the DGFT framework. IFSCA merely governs how QJs access IIBX. This split jurisdiction (MoC notifies QJs; IFSCA governs their IIBX access) is the architecturally fragile point: any change in MoC policy on QJ notifications directly affects IIBX volumes, without IFSCA having control.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">India's Gold Import Architecture</div>
+        <p>India imports ~800-900 tonnes of gold annually. The QJ scheme at IIBX is designed to channel a portion of this through IIBX, giving price discovery in USD in GIFT IFSC. The share of total imports through IIBX has historically been low (~5-10%) — the regulatory ambition significantly exceeds current market reality.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">DGFT Notification — QJ scheme</span>
+        <span class="annot-link">Circular Jan 2022 — First QJ circular</span>
+        <span class="annot-link">Circular Dec 2023 — Updated QJ process</span>
+        <span class="annot-link">RBI — FEMA directions</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 29 -->
+    <div class="annot-card" id="a29">
+      <div class="annot-reg-ref">REG 29 · Import Process</div>
+      <div class="annot-section">
+        <div class="annot-section-title">The Cross-Border Payment Problem</div>
+        <p>Sub-regulation (3) requires FEMA compliance for payment. Gold is paid for in USD (IIBX is a USD market), but the jeweller operates in INR in India. The USD payment flows: jeweller → authorised dealer bank → IIBX settlement account → qualified supplier. Each step carries exchange rate exposure. Jewellers without USD accounts or hedging capacity face FX risk that the BDR transaction itself doesn't resolve.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Customs Complexity</div>
+        <p>Physical delivery from GIFT City vault to a jeweller's workshop in Surat or Mumbai requires: BDR surrender → customs examination → duty payment → transport. The customs duty on gold imports (currently 15% basic + 6% AIDC) significantly affects the attractiveness of IIBX vs. other import channels, and is outside IFSCA's control entirely.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 30 -->
+    <div class="annot-card" id="a30">
+      <div class="annot-reg-ref">REG 30 · Qualified Suppliers</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Supply-Side Architecture</div>
+        <p>QSs are the international counterparties — refiners, bullion banks, and dealers that supply gold into IIBX. They are the supply-side equivalent of Qualified Jewellers. The LBMA refiner list is the effective selection mechanism: LBMA GDL has ~70 gold refiners and ~80 silver refiners globally. Empanelling them as IIBX Qualified Suppliers connects India's gold market to the global refining infrastructure without India needing to create its own standards.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Unallocated Position Privilege</div>
+        <p>Sub-regulation (4) — permitting QSs to hold unallocated positions — is the mechanism by which bullion banks can market-make on IIBX. An unallocated position is a claim against the bank for a specified quantity of gold, not a claim on specific bars. This enables efficient hedging and liquidity provision without the operational friction of allocated bar-level settlement.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">Circular Aug 2022 — First QS list</span>
+        <span class="annot-link">Circular Dec 2023 — Updated QS list</span>
+        <span class="annot-link">Circular Mar 2021 — IBU unallocated</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 31 -->
+    <div class="annot-card" id="a31">
+      <div class="annot-reg-ref">REG 31 · Obligations</div>
+      <div class="annot-section">
+        <div class="annot-section-title">AML at the Supply-Demand Interface</div>
+        <p>QJs and QSs represent both ends of the physical bullion flow: QSs bring gold in; QJs take gold out. Both are required to maintain books of accounts and comply with AML/CFT obligations. This creates a dual-sided traceability architecture — in theory, every kilogram of gold traded on IIBX can be traced from international refiner to Indian jeweller.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 33 -->
+    <div class="annot-card" id="a33">
+      <div class="annot-reg-ref">REG 33 · Penalties</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Penalty Toolkit</div>
+        <p>IFSCA's penalty powers derive from the IFSCA Act 2019 (s.20-21). The Act provides for penalties up to INR 25 crore or three times the profits from the violation. For an IFSC entity operating in USD, a rupee-denominated penalty cap is structurally weak — its deterrent effect diminishes as IIBX volumes grow. This is a design deficit that will likely need legislative amendment.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 35 -->
+    <div class="annot-card" id="a35">
+      <div class="annot-reg-ref">REG 35 · Repeal and Saving</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Continuity Provision</div>
+        <p>The saving clause (2) ensures that IIBX's existing recognition, India ICC's clearing recognition, and all member registrations granted under the 2020 Regulations continue without re-application. This is standard regulatory continuity architecture. The crucial question — whether prior recognition conditions survive or are superseded by BMR 2025 requirements — is answered by sub-clause (a): anything done under the 2020 Regs is deemed done under BMR 2025, to the extent consistent.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Incremental Compliance Gap</div>
+        <p>Where BMR 2025 imposes new requirements not present in the 2020 Regs (e.g., expanded governance requirements, new vault manager obligations), existing entities will need a compliance transition. BMR 2025 does not specify a transition period — this suggests IFSCA expects grandfathered entities to achieve compliance promptly.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 11 -->
+    <div class="annot-card" id="a11">
+      <div class="annot-reg-ref">REG 11 · Suspension &amp; Delisting</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Regulatory Override Power</div>
+        <p>Sub-regulation (2) gives IFSCA a direct override — it can compel the exchange to delist a contract even without the exchange's initiative. This is the systemic risk valve. The trigger is "systemic risk," which is undefined in BMR 2025, giving IFSCA broad discretion. In commodities context, the classic scenario is a market squeeze or a large concentrated short position that cannot be covered — IFSCA retains power to halt the contract rather than allow a disorderly market event.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Prior Approval Requirement</div>
+        <p>The exchange-initiated suspension requires prior IFSCA approval — it cannot act unilaterally. This prevents exchange management from delisting a contract for commercial reasons (e.g., low volume, fee economics) without regulatory sanction. The prior approval requirement creates regulatory accountability for every product lifecycle decision.</p>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>There is no prescribed timeline for IFSCA to grant or refuse prior approval for suspension. In a fast-moving market event, a suspension that takes days to receive approval could cause significant damage. The absence of an emergency exception to the prior approval requirement is a structural gap.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 13 -->
+    <div class="annot-card" id="a13">
+      <div class="annot-reg-ref">REG 13 · Regulatory Compliance</div>
+      <div class="annot-section">
+        <div class="annot-section-title">The Surveillance Obligation</div>
+        <p>Sub-regulation (3) — the obligation to detect and prevent manipulation, wash trades, and front-running — is where the exchange takes on quasi-regulatory functions. This mirrors SEBI's model under the SCRA where the exchange is simultaneously a business entity and a front-line regulator of its members. The exchange bears liability for surveillance failures, creating strong incentives to invest in monitoring technology.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Risk Framework Architecture</div>
+        <p>The requirement for a comprehensive risk framework covering market, operational, credit, and systemic risk (sub-reg 2) is a principles-based obligation — the specifics are to be approved by IFSCA. In practice, IFSCA approval of the risk framework creates a shared accountability structure: if the framework is inadequate and a market event occurs, both the exchange and IFSCA bear reputational risk for the approved framework's failure.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Cross-References</div>
+        <span class="annot-link">IIBX Exchange Rules</span>
+        <span class="annot-link">IIBX Clearing Rules</span>
+        <span class="annot-link">IIBX Byelaws</span>
+      </div>
+    </div>
+
+    <!-- ANNOT 32 -->
+    <div class="annot-card" id="a32">
+      <div class="annot-reg-ref">REG 32 · Inspection</div>
+      <div class="annot-section">
+        <div class="annot-section-title">Supervisory Architecture</div>
+        <p>The inspection power is the operational enforcement backbone of BMR 2025. The breadth — "books of account, records and documents" — combined with access to "data and systems" means IFSCA can conduct full technology audits, not just paper-based reviews. In an exchange environment, trading system logs, order audit trails, and surveillance records are the core evidentiary material.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Delegation Pattern</div>
+        <p>IFSCA "appoints an inspecting authority" — it does not inspect directly in the first instance. This mirrors SEBI's practice of appointing external auditors or SEBI officers as inspecting authorities. The inspecting authority reports to IFSCA, which then takes action. This creates a layer of procedural insulation between fact-finding and enforcement decision-making.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">Scope Includes All Regulated Entities</div>
+        <p>"Any person regulated under these regulations" captures the entire ecosystem: exchange, BCC, depository, vault managers, trading members, clearing members, QJs, and QSs. This is comprehensive supervisory reach — in theory. In practice, inspecting 570+ QJs and multiple vault managers simultaneously would require significant IFSCA resource allocation.</p>
+      </div>
+    </div>
+
+    <!-- ANNOT 34 -->
+    <div class="annot-card" id="a34">
+      <div class="annot-reg-ref">REG 34 · Appeals</div>
+      <div class="annot-section">
+        <div class="annot-section-title">SAT as Appellate Forum</div>
+        <p>Appeals go to the Securities Appellate Tribunal under s.21 of the IFSCA Act — the same SAT that hears SEBI appeals. This is a deliberate regulatory convergence: IIBX participants, despite operating in a USD market in an IFSC, are subject to the same appellate process as domestic securities market participants. SAT has expertise in exchange and market structure disputes — its jurisprudence on SEBI matters will inform its approach to IFSCA matters.</p>
+      </div>
+      <div class="annot-section">
+        <div class="annot-section-title">45-Day Limitation</div>
+        <p>The 45-day limitation for filing appeals is tight in a complex market structure dispute. Unlike civil litigation where the limitation can run to years, the short window reflects the need for finality in regulatory decisions affecting market operations. For an international participant unfamiliar with Indian procedural law, missing this window would be fatal to the appeal.</p>
+      </div>
+      <div class="fragile-box">
+        <div class="label">⚠ Fragile Assumption</div>
+        <p>SAT operates under Indian procedural law and its proceedings are in English but conducted in India. For a foreign bullion bank or international QS disputing an IFSCA decision, the cost and friction of SAT proceedings may make formal appeals uneconomical relative to compliance — which is a form of regulatory deterrence operating without any penalty being imposed.</p>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ── WHAT CHANGED: 2020 → 2025 ── -->
+<section id="changes" style="background:#F5D9C8;padding:64px 48px;border-top:3px solid #CC0000;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#CC0000;margin-bottom:8px;">Amendment Trail</div>
+    <h2 style="font-family:'Cinzel',serif;font-size:26px;color:#CC0000;margin-bottom:40px;padding-bottom:16px;border-bottom:1px solid rgba(204,0,0,0.20);">What Changed: 2020 → 2025</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+
+      <div style="background:rgba(204,0,0,0.05);border:1px solid rgba(204,0,0,0.18);border-radius:4px;padding:24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--primary);margin-bottom:12px;">New · Not in 2020</div>
+        <ul style="list-style:none;color:var(--annotation-text);font-size:14px;line-height:2;">
+          <li>◆ Vault manager registration framework</li>
+          <li>◆ DMA / Sponsored Access (Reg 21)</li>
+          <li>◆ Authorised Persons regime (Reg 20)</li>
+          <li>◆ Qualified Suppliers in primary regulation</li>
+          <li>◆ BDR issuance process (Regs 25–27)</li>
+          <li>◆ Good Delivery standards codified</li>
+          <li>◆ IBU explicit eligibility as trading member</li>
+          <li>◆ Unallocated position regime for QSs</li>
+        </ul>
+      </div>
+
+      <div style="background:rgba(26,64,80,0.07);border:1px solid rgba(26,64,80,0.25);border-radius:4px;padding:24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#1B5E6A;margin-bottom:12px;">Expanded · Present in 2020</div>
+        <ul style="list-style:none;color:var(--annotation-text);font-size:14px;line-height:2;">
+          <li>◆ Governance requirements (more granular)</li>
+          <li>◆ Net worth tiers (TCM/PCM/SCM)</li>
+          <li>◆ Fit and proper criteria</li>
+          <li>◆ QJ import mechanics</li>
+          <li>◆ Renewal process</li>
+          <li>◆ Surveillance obligations</li>
+          <li>◆ Default management framework</li>
+        </ul>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.6);border:1px solid rgba(204,0,0,0.20);border-radius:4px;padding:24px;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#991000;margin-bottom:12px;">Consolidated · From Circulars</div>
+        <ul style="list-style:none;color:var(--annotation-text);font-size:14px;line-height:2;">
+          <li>◆ LBMA Good Delivery standards</li>
+          <li>◆ Member category definitions</li>
+          <li>◆ QJ access conditions</li>
+          <li>◆ Depository registration criteria</li>
+          <li>◆ BDR surrender for physical delivery</li>
+          <li>◆ AML/CFT obligations on all entities</li>
+          <li>◆ Position limits framework</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="margin-top:32px;padding:20px 24px;background:rgba(204,0,0,0.05);border-left:3px solid var(--primary);border-radius:0 4px 4px 0;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:#CC0000;margin-bottom:8px;">Structural Observation</div>
+      <p style="color:var(--annotation-text);font-size:15px;line-height:1.75;font-family:'EB Garamond',serif;">BMR 2025 is a consolidation-and-upgrade, not a structural overhaul. The IIBX model — exchange → CCP → depository → vault — remains architecturally unchanged from 2020. What changed is the regulatory density at each layer: more explicit conditions, more participant categories, and integration of three years' worth of operational learning from IIBX's live trading. The most significant structural addition is the vault manager and depository registration regime, which gives the physical layer for the first time a comprehensive regulatory framework in the principal regulation rather than scattered circulars.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CIRCULARS INDEX ── -->
+<section id="circulars" style="background:var(--parchment);padding:64px 48px;border-top:1px solid rgba(204,0,0,0.10);">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#CC0000;margin-bottom:8px;">Ecosystem Documents</div>
+    <h2 style="font-family:'Cinzel',serif;font-size:26px;color:#CC0000;margin-bottom:8px;">Circulars &amp; Related Instruments</h2>
+    <p style="font-family:'EB Garamond',serif;font-size:16px;color:#4A1A10;margin-bottom:40px;">Documents that form the operating layer beneath BMR 2025. Each annotation above cross-references the relevant instrument.</p>
+
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-family:'EB Garamond',serif;font-size:15px;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--primary);">
+            <th style="text-align:left;padding:10px 16px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#CC0000;font-weight:400;">Date</th>
+            <th style="text-align:left;padding:10px 16px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#CC0000;font-weight:400;">Instrument</th>
+            <th style="text-align:left;padding:10px 16px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#CC0000;font-weight:400;">Subject</th>
+            <th style="text-align:left;padding:10px 16px;font-family:'DM Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:#CC0000;font-weight:400;">Regs Touched</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Mar 2021</td>
+            <td style="padding:10px 16px;color:#1A0505;">IBU Unallocated Accounts Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Enables IBUs to deal in bullion unallocated accounts — the foundational instrument for bullion banking in GIFT IFSC</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 15, Reg 30</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Sep 2021</td>
+            <td style="padding:10px 16px;color:#1A0505;">Trading &amp; Clearing Members Circular (1st)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">First framework for BTM/BCM categories, net worth, eligibility — pre-IIBX launch document</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 15–18</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Jan 2022</td>
+            <td style="padding:10px 16px;color:#1A0505;">Qualified Jewellers Import Circular (1st)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">First circular enabling QJs to import gold/silver through IIBX — sets the original import mechanics and lot sizes</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 28–29</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Aug 2022</td>
+            <td style="padding:10px 16px;color:#1A0505;">Qualified Suppliers Circular (1st)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Prescribes QS eligibility — LBMA GDL refiners, international bullion dealers; notifies first QS list</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 27, Reg 30</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Aug 2022</td>
+            <td style="padding:10px 16px;color:#1A0505;">BDR Income Tax Notification</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Notifies BDRs under s.47(viiaab) IT Act 1961 — no capital gains on BDR transfers on recognised bullion exchange subject to STT</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 25</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Dec 2022</td>
+            <td style="padding:10px 16px;color:#1A0505;">IIBX Renewal of Recognition</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">IFSCA renews IIBX's recognition under the 2020 Regs — first renewal cycle</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 5, Reg 14</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Dec 2022</td>
+            <td style="padding:10px 16px;color:#1A0505;">Monthly Development Report Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Mandates IIBX to publish monthly MDRs — transparency and market data disclosure obligation</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 13</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Jan 2023</td>
+            <td style="padding:10px 16px;color:#1A0505;">Trading &amp; Clearing Members Circular (2nd)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Updates net worth requirements — TCM USD 1.5M, PCM USD 3M, SCM USD 1M; revised eligibility criteria</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 16–18</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Mar 2023</td>
+            <td style="padding:10px 16px;color:#1A0505;">Exchange &amp; BCC Net Worth Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Prescribes minimum net worth: Bullion Exchange USD 5M; BCC USD 10M</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 6, Reg 7</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Aug 2023</td>
+            <td style="padding:10px 16px;color:#1A0505;">Trading &amp; Clearing Members Circular (3rd)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Further revision to membership framework — adds provisions for overseas entities and foreign regulated entities</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 15–18</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Dec 2023</td>
+            <td style="padding:10px 16px;color:#1A0505;">Qualified Suppliers Circular (2nd)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Updates QS list; clarifies unallocated position regime and supply mechanics for international participants</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 30–31</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Dec 2023</td>
+            <td style="padding:10px 16px;color:#1A0505;">QJ Import Process Update</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Revises mechanics for QJ gold/silver imports — updated lot sizes, payment process, delivery timelines</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 28–29</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Feb 2025</td>
+            <td style="padding:10px 16px;color:#1A0505;">Liquidity Enhancement Scheme Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Introduces fee-based incentive scheme for market makers — IFSCA's demand-side intervention for liquidity</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 10, Reg 15</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Apr 2025</td>
+            <td style="padding:10px 16px;color:#1A0505;">Operating Guidelines Amendment</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">First amendment to IFSCA Operating Guidelines under BMR 2025 — implementation mechanics post-consolidation</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">All chapters</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Apr 2025</td>
+            <td style="padding:10px 16px;color:#1A0505;">"Infusing Vibrance" Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Demand-generation circular covering product expansion, broader participant access, LES enhancements — IFSCA's growth agenda for IIBX</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 10, Reg 15, Reg 21</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Jul 2024</td>
+            <td style="padding:10px 16px;color:#1A0505;">DMA / Sponsored Access Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Full DMA/SA framework — eligibility, risk controls, liability allocation between member and DMA client</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 21</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Aug 2024</td>
+            <td style="padding:10px 16px;color:#1A0505;">Trading &amp; Clearing Members Circular (4th)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Most recent revision to membership — updated net worth thresholds, revised membership categories</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 16–18</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Aug 2025</td>
+            <td style="padding:10px 16px;color:#1A0505;">Revenue Drivers of Global Banks Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Maps how international bullion banks (IBUs) can monetise IIBX membership — market making, gold lending, clearing services</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 15, Reg 30</span></td>
+          </tr>
+          <tr style="border-bottom:1px solid #E8B4A0;">
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Sep 2025</td>
+            <td style="padding:10px 16px;color:#1A0505;">Market Access — Authorised Persons Circular</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Full framework for APs — enabling QJs, smaller entities to access IIBX through a trading member without full membership</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">Reg 20</span></td>
+          </tr>
+          <tr>
+            <td style="padding:10px 16px;font-family:'DM Mono',monospace;font-size:12px;color:#CC0000;white-space:nowrap;">Sep 2025</td>
+            <td style="padding:10px 16px;color:#1A0505;">Operating Guidelines Amendment (2nd)</td>
+            <td style="padding:10px 16px;color:#4A1A10;font-size:14px;">Second amendment to operating guidelines — further operational refinements post-BMR 2025</td>
+            <td style="padding:10px 16px;"><span style="background:var(--pill-bg);border:1px solid rgba(204,0,0,0.18);color:#CC0000;font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:2px;">All chapters</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer style="background:#FBE5D6;padding:40px 48px;border-top:1px solid rgba(204,0,0,0.10);">
+  <div style="max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:24px;">
+    <div>
+      <div style="font-family:'Cinzel',serif;font-size:15px;color:#ffffff;margin-bottom:6px;letter-spacing:0.03em;">IFSCA (Bullion Market) Regulations, 2025</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.75);">Annotated Edition — Provided Further That</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,0.5);letter-spacing:1px;">Provision text drawn from official gazette (F. No. IFSCA/GN/2025/001).</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(204,0,0,0.25);margin-top:4px;letter-spacing:1px;">Annotations are analytical commentary, not legal advice.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── SEARCH OVERLAY ── -->
+<div id="searchOverlay" style="display:none;position:fixed;inset:0;background:rgba(251,229,214,0.96);z-index:2000;align-items:flex-start;justify-content:center;padding-top:80px;">
+  <div style="background:#ffffff;border:2px solid #CC0000;border-radius:4px;width:min(640px,90vw);overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,0.5);">
+    <div style="display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid #E8B4A0;">
+      <span style="font-size:16px;color:#CC0000;">⌕</span>
+      <input id="searchInput" type="text" placeholder="Search provisions, terms, concepts…" style="flex:1;background:transparent;border:none;outline:none;font-family:'EB Garamond',serif;font-size:18px;color:#1A0505;"/>
+      <kbd style="font-family:'DM Mono',monospace;font-size:11px;color:rgba(255,255,255,0.75);border:1px solid rgba(204,0,0,0.20);border-radius:3px;padding:2px 8px;">ESC</kbd>
+    </div>
+    <div id="searchResults" style="max-height:400px;overflow-y:auto;padding:8px 0;"></div>
+    <div style="padding:10px 20px;border-top:1px solid rgba(204,0,0,0.10);font-family:'DM Mono',monospace;font-size:10px;color:#CC0000;letter-spacing:1px;">
+      ↑↓ navigate &nbsp;·&nbsp; ↵ jump to provision &nbsp;·&nbsp; ESC close &nbsp;·&nbsp; Cmd+K / Ctrl+K to open
+    </div>
+  </div>
+</div>
+
+<!-- ── KEYBOARD SHORTCUT HINT ── -->
+<div style="position:fixed;bottom:24px;right:24px;background:var(--ink);border:1px solid rgba(204,0,0,0.20);border-radius:4px;padding:8px 14px;font-family:'DM Mono',monospace;font-size:10px;color:#CC0000;letter-spacing:1px;opacity:0;animation:fadeHint 6s ease forwards;z-index:500;pointer-events:none;">
+  Press <kbd style="color:var(--primary);border:1px solid rgba(204,0,0,0.30);border-radius:2px;padding:0 5px;">K</kbd> to search &nbsp;·&nbsp; <kbd style="color:var(--primary);border:1px solid rgba(204,0,0,0.30);border-radius:2px;padding:0 5px;">J</kbd><kbd style="color:var(--primary);border:1px solid rgba(204,0,0,0.30);border-radius:2px;padding:0 5px;">L</kbd> to navigate
+</div>
+
+<style>
+@keyframes fadeHint {
+  0%   { opacity: 0; transform: translateY(4px); }
+  15%  { opacity: 1; transform: translateY(0); }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+#searchOverlay.open { display: flex !important; }
+</style>
+
+<script>
+// ── ANNOTATION ACTIVATION ──
+let currentAnnot = null;
+let currentProvision = null;
+const allProvisions = [...document.querySelectorAll('.provision[id]')];
+
+function activateAnnot(provision, annotId) {
+  if (currentProvision) currentProvision.classList.remove('active');
+  if (currentAnnot) currentAnnot.classList.remove('visible');
+
+  provision.classList.add('active');
+  currentProvision = provision;
+
+  const annotCard = document.getElementById(annotId);
+  const placeholder = document.getElementById('annotPlaceholder');
+
+  if (annotCard) {
+    placeholder.style.display = 'none';
+    annotCard.classList.add('visible');
+    currentAnnot = annotCard;
+    const panel = document.querySelector('.annotation-panel');
+    panel.scrollTo({ top: annotCard.offsetTop - panel.offsetTop - 60, behavior: 'smooth' });
+  } else {
+    placeholder.style.display = 'block';
+    placeholder.textContent = 'Annotation in progress for this provision.';
+    currentAnnot = null;
+  }
+}
+
+// ── KEYBOARD NAVIGATION ──
+let focusedProvisionIdx = -1;
+
+document.addEventListener('keydown', e => {
+  // Open search
+  if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); openSearch(); return; }
+  if (e.key === 'k' && !e.metaKey && !e.ctrlKey && document.activeElement.tagName !== 'INPUT') { openSearch(); return; }
+
+  // Close search
+  if (e.key === 'Escape') { closeSearch(); return; }
+
+  if (document.getElementById('searchOverlay').classList.contains('open')) return;
+
+  // J/L = prev/next provision
+  if (e.key === 'j' || e.key === 'J') {
+    focusedProvisionIdx = Math.max(0, focusedProvisionIdx - 1);
+    jumpToProvision(focusedProvisionIdx);
+  }
+  if (e.key === 'l' || e.key === 'L') {
+    focusedProvisionIdx = Math.min(allProvisions.length - 1, focusedProvisionIdx + 1);
+    jumpToProvision(focusedProvisionIdx);
+  }
+});
+
+function jumpToProvision(idx) {
+  const p = allProvisions[idx];
+  if (!p) return;
+  p.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const annotId = p.getAttribute('data-annot');
+  if (annotId) setTimeout(() => activateAnnot(p, annotId), 300);
+}
+
+// ── SEARCH ──
+const searchOverlay = document.getElementById('searchOverlay');
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+
+// Build search index from provisions
+const searchIndex = allProvisions.map(p => ({
+  id: p.id,
+  heading: p.querySelector('.reg-heading')?.textContent || '',
+  number: p.querySelector('.reg-number')?.textContent || '',
+  text: p.querySelector('.reg-text')?.textContent?.slice(0,400) || '',
+  annotId: p.getAttribute('data-annot'),
+  el: p
+}));
+
+function openSearch() {
+  searchOverlay.classList.add('open');
+  searchInput.focus();
+  renderSearchResults('');
+}
+
+function closeSearch() {
+  searchOverlay.classList.remove('open');
+  searchInput.value = '';
+}
+
+searchInput.addEventListener('input', () => renderSearchResults(searchInput.value));
+
+searchInput.addEventListener('keydown', e => {
+  const items = searchResults.querySelectorAll('.sr-item');
+  const active = searchResults.querySelector('.sr-item.sr-active');
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    const next = active ? active.nextElementSibling : items[0];
+    if (next) { active?.classList.remove('sr-active'); next.classList.add('sr-active'); next.scrollIntoView({block:'nearest'}); }
+  }
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    const prev = active?.previousElementSibling;
+    if (prev) { active.classList.remove('sr-active'); prev.classList.add('sr-active'); prev.scrollIntoView({block:'nearest'}); }
+  }
+  if (e.key === 'Enter') {
+    const hit = searchResults.querySelector('.sr-item.sr-active') || searchResults.querySelector('.sr-item');
+    if (hit) { hit.click(); }
+  }
+});
+
+function renderSearchResults(query) {
+  const q = query.trim().toLowerCase();
+  const hits = q.length < 1
+    ? searchIndex.slice(0, 10)
+    : searchIndex.filter(item =>
+        item.heading.toLowerCase().includes(q) ||
+        item.number.toLowerCase().includes(q) ||
+        item.text.toLowerCase().includes(q)
+      ).slice(0, 8);
+
+  if (hits.length === 0) {
+    searchResults.innerHTML = '<div style="padding:24px;text-align:center;font-family:\'DM Mono\',monospace;font-size:12px;color:rgba(50,20,10,0.4);">No provisions found</div>';
+    return;
+  }
+
+  searchResults.innerHTML = hits.map((item, i) => `
+    <div class="sr-item${i===0?' sr-active':''}" data-id="${item.id}" data-annot="${item.annotId||''}"
+      style="display:flex;gap:12px;align-items:flex-start;padding:12px 20px;cursor:pointer;transition:background 0.15s;border-bottom:1px solid rgba(204,0,0,0.06);">
+      <span style="font-family:'DM Mono',monospace;font-size:10px;color:#CC0000;white-space:nowrap;padding-top:3px;min-width:60px;">${item.number}</span>
+      <div>
+        <div style="font-family:'EB Garamond',serif;font-size:15px;color:#1A0505;font-weight:700;">${item.heading}</div>
+        <div style="font-size:12px;color:#660000;margin-top:2px;line-height:1.4;">${highlightQ(item.text.slice(0,120), q)}…</div>
+      </div>
+    </div>
+  `).join('');
+
+  searchResults.querySelectorAll('.sr-item').forEach(item => {
+    item.addEventListener('mouseenter', () => {
+      searchResults.querySelectorAll('.sr-item').forEach(i => i.classList.remove('sr-active'));
+      item.classList.add('sr-active');
+    });
+    item.addEventListener('click', () => {
+      const el = document.getElementById(item.dataset.id);
+      if (el) {
+        closeSearch();
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (item.dataset.annot) setTimeout(() => activateAnnot(el, item.dataset.annot), 400);
+        }, 50);
+      }
+    });
+    item.addEventListener('mouseover', () => item.style.background='rgba(204,0,0,0.05)');
+    item.addEventListener('mouseout', () => item.style.background='');
+  });
+}
+
+function highlightQ(text, q) {
+  if (!q) return text;
+  return text.replace(new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi'), m => `<mark style="background:rgba(204,0,0,0.18);color:inherit;">${m}</mark>`);
+}
+
+searchOverlay.addEventListener('click', e => { if (e.target === searchOverlay) closeSearch(); });
+
+// ── ACTIVE NAV HIGHLIGHTING ──
+const navLinks = document.querySelectorAll('.nav-items li a');
+
+function updateActiveNav() {
+  const scrollPos = window.scrollY + 120;
+  navLinks.forEach(link => link.classList.remove('active'));
+  const allTargets = [...document.querySelectorAll('[id^="reg"], [id^="ch"]')];
+  let current = null;
+  allTargets.forEach(el => { if (el.offsetTop <= scrollPos) current = el; });
+  if (current) {
+    const link = document.querySelector(`.nav-items a[href="#${current.id}"]`);
+    if (link) link.classList.add('active');
+  }
+}
+
+// ── READING PROGRESS ──
+function updateProgress() {
+  const doc = document.documentElement;
+  const scrolled = doc.scrollTop || document.body.scrollTop;
+  const total = doc.scrollHeight - doc.clientHeight;
+  document.getElementById('progressBar').style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+}
+
+window.addEventListener('scroll', () => { updateActiveNav(); updateProgress(); });
+
+// ── ECOSYSTEM SCROLL ──
+function scrollTo(id) {
+  const el = document.querySelector(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── ARTICLE BANNER ──
+document.getElementById('articleBanner').addEventListener('click', e => {
+  e.preventDefault();
+  // TODO: replace with actual PFT article URL before publishing
+  alert('Update href on #articleBanner to point to the PFT Substack article before deploying.');
+});
+
+// ── NAV TRACK FOCUSED PROVISION ON SCROLL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = allProvisions.indexOf(entry.target);
+      if (idx >= 0) focusedProvisionIdx = idx;
+    }
+  });
+}, { threshold: 0.5 });
+
+allProvisions.forEach(p => observer.observe(p));
+
+// Init
+updateActiveNav();
+</script>
+
+</body>
+</html>
